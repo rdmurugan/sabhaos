@@ -1,0 +1,25 @@
+# Personal customization — users should fork and edit, not commit secrets
+.env
+.env.*
+secrets.yaml
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local CLAUDE.md overrides (if a user is testing a private variant in this repo)
+CLAUDE.local.md
+
+# Claude Code session/settings — never commit
+.claude/
+
+# Build artifacts (none expected, but in case)
+dist/
+build/
+*.log

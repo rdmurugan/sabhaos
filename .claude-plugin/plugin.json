@@ -1,0 +1,32 @@
+{
+  "name": "sabha-os",
+  "displayName": "Sabha OS",
+  "version": "1.0.0",
+  "description": "A C-suite routing protocol for Claude. Every substantive question is classified into a role (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO) and answered in that role's voice: terse, decisive, recommendation-first.",
+  "author": {
+    "name": "Sabha OS contributors",
+    "url": "https://github.com/rdmurugan/sabhaos"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/rdmurugan/sabhaos",
+  "repository": "https://github.com/rdmurugan/sabhaos",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "prompt",
+    "protocol",
+    "executive",
+    "advisor",
+    "productivity",
+    "skill",
+    "sabha"
+  ],
+  "skills": [
+    "skills/sabha-router"
+  ],
+  "commands": [
+    "commands/ask.md",
+    "commands/engage.md",
+    "commands/route.md"
+  ]
+}

@@ -105,6 +105,20 @@ Most AI replies are *option-shaped*: *"here are three approaches, with pros and 
 4. **Mode discipline.** Ask = chat. Engage = file it. No fifteen-page replies to a one-line question.
 5. **A memory of you.** With a local memory MCP wired in, every reply draws on your accumulated Sakthi — your decisions, your people, your projects.
 
+## Does it actually work?
+
+A reproducible eval ships in [`evals/`](./evals/). 20 operator-style questions, each run twice — once with no system prompt (baseline) and once with the Sabha charter loaded. Both replies are judged by an LLM-as-judge on five axes (decisiveness, tradeoff-named, concreteness, routing-present, length-discipline) plus pairwise preference.
+
+Methodology, rubric, and limitations: [`evals/README.md`](./evals/README.md). Run it yourself:
+
+```bash
+pip install -r evals/requirements.txt
+export ANTHROPIC_API_KEY=sk-ant-...
+python evals/run_eval.py
+```
+
+Results are committed to [`evals/results/`](./evals/results/). If the numbers don't move, the protocol isn't earning its keep — that data lives in the repo, not in marketing copy.
+
 ## What's in this repo
 
 ```
@@ -129,6 +143,12 @@ sabha-os/
 │   ├── solo-founder.CLAUDE.md       # Profession preset
 │   ├── agency.CLAUDE.md             # Profession preset
 │   └── researcher.CLAUDE.md         # Profession preset
+├── evals/
+│   ├── questions.yaml               # 20 operator-style questions
+│   ├── run_eval.py                  # The harness
+│   ├── judge.py                     # LLM-as-judge rubric + pairwise
+│   ├── README.md                    # Methodology
+│   └── results/                     # JSON + Markdown reports
 ├── LICENSE                          # MIT
 └── README.md
 ```

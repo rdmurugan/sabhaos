@@ -1,0 +1,208 @@
+# Sabha OS — eval question set v1
+#
+# 20 operator-style questions across the eight default roles. Each is a real
+# decision an operator might face. There is no single "correct" answer — what
+# we're measuring is whether the *shape* of the answer is more useful with
+# the Sabha protocol enabled (decisive, tradeoff-aware, concrete, routed)
+# vs. baseline (option-shaped, hedged).
+#
+# Question format:
+#   id:        stable identifier (used in result tables)
+#   role:      expected primary role under Sabha protocol
+#   category:  high-level bucket
+#   prompt:    the actual question text sent to the model
+#   notes:     optional reviewer note on what a strong reply would name
+
+questions:
+  # ─── CFO ───────────────────────────────────────────────────────────────
+  - id: cfo-01
+    role: CFO
+    category: cash
+    prompt: |
+      We have $180K in the bank, burn is $32K/month, and there's a $90K invoice
+      that's been outstanding 40 days from a client we've worked with for two
+      years. Should I take on a $40K bridge line of credit at 12% APR to cover
+      payroll, or chase the invoice harder?
+    notes: A strong reply names the actual move, runway in months, and the tradeoff.
+
+  - id: cfo-02
+    role: CFO
+    category: pricing
+    prompt: |
+      Our annual SaaS subscription is $1,200. Three customers asked for a
+      monthly option. Two are existing accounts who'd flip; one is a new lead.
+      Should we offer monthly at $120/mo, $140/mo, or stay annual-only?
+    notes: A strong reply names a number, not a range; mentions churn risk on monthly.
+
+  - id: cfo-03
+    role: CFO
+    category: runway
+    prompt: |
+      I have nine months of runway. A senior engineer is asking for a 15% raise
+      to match a competing offer. Their work is critical to the Q3 launch.
+      Match, counter, or let them walk?
+    notes: A strong reply commits to one of the three and names the implication.
+
+  # ─── CSO ───────────────────────────────────────────────────────────────
+  - id: cso-01
+    role: CSO
+    category: competition
+    prompt: |
+      A well-funded competitor just shipped the exact feature we were planning
+      for Q2. They're at $8M ARR with 40 people; we're at $600K ARR with 4
+      people. Do we still ship our version, pivot the feature, or abandon it?
+    notes: Strong reply names the wedge — what we have that they don't.
+
+  - id: cso-02
+    role: CSO
+    category: partnership
+    prompt: |
+      A regional reseller wants exclusive distribution rights in Southeast Asia
+      for two years in exchange for $200K upfront and a guaranteed $50K/quarter
+      minimum. We have no APAC presence. Sign or pass?
+    notes: Strong reply names the strategic cost of exclusivity.
+
+  - id: cso-03
+    role: CSO
+    category: market-entry
+    prompt: |
+      We sell developer tools. A Fortune 500 enterprise wants us to build a
+      custom integration for them — six months of engineering, $400K contract.
+      Take it, or stay focused on our PLG motion?
+    notes: Strong reply weighs the distraction tax, not just the cash.
+
+  # ─── CIO ───────────────────────────────────────────────────────────────
+  - id: cio-01
+    role: CIO
+    category: vendor
+    prompt: |
+      We're spending $2,400/month on a Vercel + Neon + Cloudflare stack for a
+      product that does 800K req/month. Self-host on a Hetzner box for $40/mo,
+      or stay where we are?
+    notes: Strong reply names the on-call cost, not just the bill.
+
+  - id: cio-02
+    role: CIO
+    category: security
+    prompt: |
+      Our SOC 2 Type II audit is in four months. We've never done one. Should
+      we hire Vanta + a fractional security person ($45K total), or push the
+      audit a year while we build practices in-house?
+    notes: Strong reply names what loses if the audit slips a year.
+
+  - id: cio-03
+    role: CIO
+    category: tooling
+    prompt: |
+      The team is using a mix of Notion + Linear + Slack + Google Workspace.
+      A new hire wants to add Coda for docs. Approve, deny, or consolidate?
+    notes: Strong reply names the tool-sprawl tradeoff.
+
+  # ─── CAIO ──────────────────────────────────────────────────────────────
+  - id: caio-01
+    role: CAIO
+    category: model
+    prompt: |
+      We're shipping a customer support copilot. Average query is 200 tokens
+      in, 600 tokens out. ~15K queries/day. Use Claude Sonnet 4.6, Haiku 4.5,
+      or GPT-4 mini? Or route by complexity?
+    notes: Strong reply commits to a model and names cost+latency in real numbers.
+
+  - id: caio-02
+    role: CAIO
+    category: rag
+    prompt: |
+      We have 2,000 internal documents (~150 words each) and want them
+      searchable by the support team. Build a RAG pipeline (Pinecone +
+      embedding model), use a hosted search (Algolia), or stuff into prompt
+      context?
+    notes: Strong reply names a threshold above which the recommendation flips.
+
+  # ─── CMO ───────────────────────────────────────────────────────────────
+  - id: cmo-01
+    role: CMO
+    category: positioning
+    prompt: |
+      We've been positioning as "the AI productivity tool for solo founders."
+      Sign-ups are 200/month, conversion to paid is 3%. Sales calls reveal
+      most signups think we're a generic ChatGPT wrapper. Reposition or fix
+      the funnel?
+    notes: Strong reply names the actual rewrite, not "improve messaging."
+
+  - id: cmo-02
+    role: CMO
+    category: channels
+    prompt: |
+      We have $5K/month for paid acquisition. Currently split across Google
+      Ads (60%), LinkedIn (30%), Reddit (10%). CAC is $180 across the blend
+      with Google driving most of it. Consolidate to Google, double LinkedIn,
+      or test a new channel?
+    notes: Strong reply commits and names the metric to watch.
+
+  # ─── CXO ───────────────────────────────────────────────────────────────
+  - id: cxo-01
+    role: CXO
+    category: retention
+    prompt: |
+      Churn is 8%/month. Cohort analysis shows users who hit the dashboard
+      five times in week one retain 4x better. Currently, median user hits it
+      twice. What's the single highest-leverage fix?
+    notes: Strong reply names the actual UI/email/flow change.
+
+  - id: cxo-02
+    role: CXO
+    category: onboarding
+    prompt: |
+      New-user activation rate is 32%. The onboarding flow is six steps. Cut
+      to three, add a video at step one, or move to product-led (skip
+      onboarding entirely)?
+    notes: Strong reply names the move and the assumption it depends on.
+
+  # ─── CHRO ──────────────────────────────────────────────────────────────
+  - id: chro-01
+    role: CHRO
+    category: hiring
+    prompt: |
+      Engineering team of three. We need one more person. Strong-but-junior
+      candidate at $110K, or solid-mid-level at $165K, or fractional senior at
+      $12K/month (no equity)?
+    notes: Strong reply names the assumption that decides it.
+
+  - id: chro-02
+    role: CHRO
+    category: classification
+    prompt: |
+      A contractor has been working with us 35hrs/week for eight months. They
+      use our equipment, attend our standups, work on our roadmap. They want
+      to keep contracting (their preference). Are we exposed?
+    notes: Strong reply flags misclassification risk and the legal threshold.
+
+  # ─── CEO (cross-cutting) ──────────────────────────────────────────────
+  - id: ceo-01
+    role: CEO
+    category: cross-cutting
+    prompt: |
+      We have one credible $400K consulting opportunity that would distract
+      the team for two quarters, OR we double down on the product and try to
+      hit $1M ARR by year-end (currently $600K, growing 15%/month). Both are
+      defensible. Which do I do?
+    notes: A strong reply names the irreducible founder tradeoff.
+
+  - id: ceo-02
+    role: CEO
+    category: cross-cutting
+    prompt: |
+      My co-founder and I disagree on whether to raise a seed round now ($2M
+      target, dilutive but accelerates everything) or bootstrap to profitability
+      (current trajectory suggests 14 months). It's 50/50 between us. How do
+      I break the tie?
+    notes: A strong reply structures the decision, doesn't pick a side.
+
+  - id: ceo-03
+    role: CEO
+    category: cross-cutting
+    prompt: |
+      Customer satisfaction score is 8.7. NPS is 62. But churn is 6%/month.
+      The CXO says fix activation. The CFO says raise prices. The CMO says
+      change the ICP. All three are partially right. Where do I focus first?
+    notes: A strong reply commits and names what the others wait on.

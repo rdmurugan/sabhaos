@@ -4,6 +4,21 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.2.0] — 2026-05-14
+
+Adds an evaluation harness.
+
+### Added
+- `evals/` directory with 20 operator-style questions, LLM-as-judge harness, and a methodology README.
+- Measures decisiveness, tradeoff-named, concreteness, routing-present, length-discipline, plus pairwise preference (Sabha vs. baseline).
+- Default candidate model: Claude Sonnet 4.6. Default judge: Claude Opus 4.7.
+- Run with `python evals/run_eval.py` (see `evals/README.md`). Cost: ~$1-3 per full run.
+- Result files commit to `evals/results/` so claims about protocol effectiveness are checkable.
+
+### Known limitations
+- n=20 — confidence intervals on per-axis means are wide. Pairwise signal more reliable than absolute scores.
+- LLM-as-judge has known biases; human-judge variant is a welcome PR.
+
 ## [1.1.0] — 2026-05-14
 
 Positioning release: Sabha + Chanakya + Sakthi.

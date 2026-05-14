@@ -12,7 +12,7 @@ Sabha OS is tiny by design — a `CLAUDE.md`, a skill, three slash commands. The
 ## What we don't want
 
 - Long meta-documentation. The protocol is the product. If the docs get longer than the protocol, something is off.
-- Extra dependencies. Sabha runs entirely on Claude's existing capabilities — no npm install, no python deps.
+- Extra dependencies *in the protocol path*. Sabha itself runs entirely on Claude's existing capabilities — no npm install, no python deps in `CLAUDE.md`, `skills/`, or `commands/`. The `evals/` directory is exempt and has its own `requirements.txt`.
 - Hard-coded business logic in the skill. All customization should be doable by editing `CLAUDE.md`.
 
 ## How to PR

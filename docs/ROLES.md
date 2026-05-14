@@ -1,6 +1,8 @@
 # Roles reference
 
-The eight default roles, what they cover, and how their voices differ.
+The eight default roles in the **professional council**, what they cover, and how their voices differ. All roles share the **Chanakya** disposition (decisive, tradeoff-aware, terse), and every reply they give is meant to compound into your **Sakthi** via the memory layer.
+
+For non-professional councils — `personal-sakthi.CLAUDE.md` (life roles) and `developer-sakthi.CLAUDE.md` (code roles) — see the corresponding files in `examples/`.
 
 ---
 
@@ -94,7 +96,7 @@ The eight default roles, what they cover, and how their voices differ.
 
 ## Customizing roles
 
-The eight above are defaults. Common customizations:
+The eight above are defaults for the **professional council**. Common customizations:
 
 - **Solo founder, simpler stack:** collapse CFO+CSO into "Operator," drop CHRO if you have no employees.
 - **Agency:** rename CIO to "Creative Director," add "Account Lead."
@@ -103,4 +105,9 @@ The eight above are defaults. Common customizations:
 
 Edit `CLAUDE.md` directly — the role table there is what the model actually reads.
 
-See `examples/` for full role-set presets.
+See `examples/` for full role-set presets, including:
+
+- `personal-sakthi.CLAUDE.md` — Health, Finance, Family, Career, Time, Self
+- `professional-sakthi.CLAUDE.md` — the default C-suite council above
+- `developer-sakthi.CLAUDE.md` — Architect, Reviewer, Security, Performance, QA, Mentor
+- `solo-founder.CLAUDE.md`, `agency.CLAUDE.md`, `researcher.CLAUDE.md` — profession-tuned variants

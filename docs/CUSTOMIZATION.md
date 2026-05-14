@@ -2,6 +2,16 @@
 
 Sabha is a single file — `CLAUDE.md` — plus a thin shell of skills and slash commands. Everything you'd want to change lives in `CLAUDE.md`.
 
+## Picking a starting council
+
+Three reference councils ship in `examples/`. Pick the one closest to what you want, copy it to your project's `CLAUDE.md`, and edit:
+
+- **`personal-sakthi.CLAUDE.md`** — life roles (Health, Finance, Family, Career, Time, Self). Use this when Sabha is helping you run your life, not a business.
+- **`professional-sakthi.CLAUDE.md`** — the default C-suite council (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO). Use this for company / business work.
+- **`developer-sakthi.CLAUDE.md`** — code roles (Architect, Reviewer, Security, Performance, QA, Mentor). Use this for engineering-heavy work where the questions are mostly about code, not business.
+
+Profession-specific variants — `solo-founder.CLAUDE.md`, `agency.CLAUDE.md`, `researcher.CLAUDE.md` — are tuned subsets of the professional council.
+
 ## Quick personalization (5 minutes)
 
 Open `CLAUDE.md`. Find the `Known entities` block:
@@ -47,12 +57,22 @@ Find the `ANSWER` section. Defaults are:
 
 To make it warmer, swap "Terse over verbose" for "Conversational but on-point." To make it more exploratory, swap "Recommend, don't survey" for "Recommend, then sketch two alternatives." Both work — they just change the texture.
 
-## Wiring in a memory MCP
+## Wiring in a memory MCP — where your Sakthi lives
 
-Sabha's `MEMORY` section is intentionally generic. If you connect a memory MCP ([MemPalace](https://github.com/MemPalace/mempalace), mem0, Letta, Mem, Pieces, anything), edit the section to name it:
+Sabha is local-first by design: your accumulated knowledge — your **Sakthi** — should live on your machine, not in someone else's database. The `MEMORY` section in `CLAUDE.md` is intentionally generic so you can wire in any MCP that exposes search and write tools.
+
+The default example uses [**MemPalace**](https://github.com/MemPalace/mempalace) — MIT, open-source, graph-shaped, runs locally. Other options that work the same way:
+
+- **mem0** — semantic key-value memory, hosted or self-host
+- **Letta** — stateful agents with memory
+- **Zep** — temporal knowledge graph memory
+- **Pieces** — desktop-app memory with MCP support
+- **plain `memory/*.md`** — a folder of markdown files, no MCP at all
+
+To swap memory providers, edit the `MEMORY` section to name your tool:
 
 ```markdown
-## 2. MEMORY
+## 2. MEMORY — your Sakthi lives here
 
 A memory layer is connected: **mem0**. Before asserting facts about my known
 entities, query mem0. Tools to use:
@@ -63,7 +83,7 @@ Known entities (these have records in memory):
 PEOPLE: ...
 ```
 
-The model will then prefer the memory MCP over guessing.
+The model will then prefer the memory MCP over guessing, and every engage-mode session will write back so your Sakthi compounds.
 
 ## Adding domain knowledge
 

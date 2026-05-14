@@ -2,7 +2,7 @@
 
 Most AI replies are *option-shaped*. You ask "should I do X?" and get "well, here are five ways to think about it." That's exhausting when you're running something. You don't need a survey of possibilities — you need a recommendation, the tradeoff, and the next move.
 
-Sabha forces four disciplines on every load-bearing reply.
+Sabha forces five disciplines on every load-bearing reply.
 
 ## 1. A role
 
@@ -22,13 +22,25 @@ Two modes, and only two. *Ask* is a chat reply — quick, inline, no file. *Enga
 
 This stops the dreaded "I asked a one-line question and got back a fifteen-page treatise."
 
+## 5. Local memory — your Sakthi compounds
+
+A council that forgets you between sessions is a *generic* council. Sabha is built around a memory MCP that runs on your machine — your **Sakthi** (Sanskrit/Tamil: *power*). Every decision, every person, every project compounds there. Three sessions in, your CFO role knows your runway. Ten sessions in, your CSO knows which bets you killed and why. A year in, your council has the institutional memory of a real C-suite — but only you can read it.
+
+This is the difference between renting an opinion and building an asset.
+
 ---
 
-## Why "Sabha"?
+## Why "Sabha," "Chanakya," "Sakthi"?
 
-सभा. Sanskrit for *assembly* or *council*. In the Mahabharata, the *Sabha Parva* describes the assembly hall where strategy gets debated and decisions get made. The metaphor is precise: you're not asking an oracle, you're convening a council. The council has roles. Each role has a domain and a voice. The council can disagree. The user — the king, the founder, the operator — makes the final call.
+**Sabha** (सभा). Sanskrit for *assembly* or *council*. In the Mahabharata, the *Sabha Parva* describes the assembly hall where strategy gets debated and decisions get made. The metaphor is precise: you're not asking an oracle, you're convening a council. The council has roles. Each role has a domain and a voice. The council can disagree. The user — the king, the founder, the operator — makes the final call.
 
-The protocol doesn't replace your judgment. It improves the inputs.
+**Chanakya** (4th century BCE). The archetype the council embodies. Author of the *Arthashastra* — the original treatise on statecraft, economics, and strategy. The architect behind Chandragupta Maurya's rise. The world's first systematic strategic advisor. Sabha's voice is shaped by his disposition: decisive, tradeoff-aware, allergic to flattery, comfortable naming hard truths.
+
+**Sakthi** (शक्ति). Sanskrit/Tamil for *power*. Not power-over, but power-of — the capacity built from accumulated experience, decisions, and the company you keep. The outcome of running a council over time. The memory layer is where your Sakthi lives.
+
+Together: **a Sabha (council) in the Chanakya tradition that builds your Sakthi (power) over time, with local memory.**
+
+The protocol doesn't replace your judgment. It improves the inputs and remembers what you've already decided.
 
 ---
 

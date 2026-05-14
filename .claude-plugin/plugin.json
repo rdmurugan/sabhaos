@@ -1,8 +1,8 @@
 {
   "name": "sabha-os",
   "displayName": "Sabha OS",
-  "version": "1.0.0",
-  "description": "A C-suite routing protocol for Claude. Every substantive question is classified into a role (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO) and answered in that role's voice: terse, decisive, recommendation-first.",
+  "version": "1.1.0",
+  "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role and answered in the Chanakya tradition — terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project.",
   "author": {
     "name": "Sabha OS contributors",
     "url": "https://github.com/rdmurugan/sabhaos"
@@ -17,6 +17,11 @@
     "protocol",
     "executive",
     "advisor",
+    "council",
+    "chanakya",
+    "sakthi",
+    "memory",
+    "local-first",
     "productivity",
     "skill",
     "sabha"

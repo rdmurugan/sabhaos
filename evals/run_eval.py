@@ -21,7 +21,6 @@ import datetime as dt
 import json
 import os
 import sys
-import time
 from pathlib import Path
 from typing import Optional
 
@@ -35,6 +34,7 @@ from judge import (  # noqa: E402
     PairwiseResult,
     pairwise_preference,
     score_reply,
+    with_retry,
 )
 
 
@@ -67,7 +67,7 @@ def generate_reply(
     condition: str,
     sabha_system: str,
 ) -> str:
-    """Run the candidate model under the given condition."""
+    """Run the candidate model under the given condition (with retries on transient errors)."""
     kwargs = {
         "model": model,
         "max_tokens": 1200,
@@ -75,7 +75,10 @@ def generate_reply(
     }
     if condition == "sabha":
         kwargs["system"] = sabha_system
-    response = client.messages.create(**kwargs)
+    response = with_retry(
+        lambda: client.messages.create(**kwargs),
+        label=f"gen:{condition}",
+    )
     return response.content[0].text
 
 
@@ -94,17 +97,9 @@ def run_question(
 
     replies: dict[str, str] = {}
     for condition in CONDITIONS:
-        for attempt in range(3):
-            try:
-                replies[condition] = generate_reply(
-                    client, candidate_model, prompt, condition, sabha_system
-                )
-                break
-            except Exception as exc:  # noqa: BLE001
-                if attempt == 2:
-                    raise
-                print(f"    {condition} attempt {attempt + 1} failed: {exc}", flush=True)
-                time.sleep(2 ** attempt)
+        replies[condition] = generate_reply(
+            client, candidate_model, prompt, condition, sabha_system
+        )
 
     print(f"  [{qid}] judging...", flush=True)
     scores: dict[str, JudgeScore] = {}
@@ -269,6 +264,35 @@ def render_markdown(records: list[dict], summary: dict, meta: dict) -> str:
     return "\n".join(lines)
 
 
+def save_checkpoint(records: list[dict], basename: str, meta: dict) -> None:
+    """Write JSON + Markdown snapshots after each completed question.
+
+    Idempotent: overwrites existing files. Always also refreshes latest.md
+    so the most recent run is easy to find.
+    """
+    RESULTS_DIR.mkdir(exist_ok=True, parents=True)
+    summary = aggregate(records)
+    json_path = RESULTS_DIR / f"{basename}.json"
+    md_path = RESULTS_DIR / f"{basename}.md"
+    latest_md = RESULTS_DIR / "latest.md"
+
+    with json_path.open("w") as f:
+        json.dump({"meta": meta, "summary": summary, "records": records}, f, indent=2)
+    md = render_markdown(records, summary, meta)
+    md_path.write_text(md)
+    latest_md.write_text(md)
+
+
+def load_checkpoint(basename: str) -> tuple[list[dict], Optional[dict]]:
+    """Load existing records if a checkpoint exists. Returns ([], None) if not."""
+    json_path = RESULTS_DIR / f"{basename}.json"
+    if not json_path.exists():
+        return [], None
+    with json_path.open() as f:
+        data = json.load(f)
+    return data.get("records", []), data.get("meta")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the Sabha OS eval.")
     parser.add_argument("--candidate-model", default=DEFAULT_CANDIDATE_MODEL)
@@ -282,6 +306,11 @@ def main() -> int:
         default=None,
         help="Override the result file basename (default: YYYY-MM-DD).",
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="If the output file already exists, skip questions already completed.",
+    )
     args = parser.parse_args()
 
     if not os.environ.get("ANTHROPIC_API_KEY"):
@@ -292,13 +321,39 @@ def main() -> int:
     sabha_system = load_sabha_system_prompt()
     questions = load_questions(args.limit)
 
+    run_date = dt.date.today().isoformat()
+    basename = args.out_name or run_date
+    meta = {
+        "run_date": run_date,
+        "candidate_model": args.candidate_model,
+        "judge_model": args.judge_model,
+    }
+
+    if args.resume:
+        existing, existing_meta = load_checkpoint(basename)
+        done_ids = {r["id"] for r in existing}
+        records: list[dict] = list(existing)
+        if existing_meta:
+            # Preserve original run_date so the report stays coherent on resume.
+            meta["run_date"] = existing_meta.get("run_date", run_date)
+        if done_ids:
+            print(
+                f"Resuming '{basename}': {len(done_ids)} of {len(questions)} "
+                f"questions already complete; will skip those."
+            )
+    else:
+        records = []
+        done_ids = set()
+
     print(
         f"Running {len(questions)} questions "
         f"(candidate={args.candidate_model}, judge={args.judge_model})..."
     )
 
-    records: list[dict] = []
     for i, q in enumerate(questions, start=1):
+        if q["id"] in done_ids:
+            print(f"[{i}/{len(questions)}] {q['id']} (cached, skipping)")
+            continue
         print(f"[{i}/{len(questions)}] {q['id']}")
         rec = run_question(
             client=client,
@@ -309,27 +364,13 @@ def main() -> int:
             seed=args.seed + i,
         )
         records.append(rec)
+        # Checkpoint after every question so a mid-run crash never loses prior work.
+        save_checkpoint(records, basename, meta)
 
     summary = aggregate(records)
-    run_date = dt.date.today().isoformat()
-    meta = {
-        "run_date": run_date,
-        "candidate_model": args.candidate_model,
-        "judge_model": args.judge_model,
-    }
-    RESULTS_DIR.mkdir(exist_ok=True, parents=True)
-    basename = args.out_name or run_date
-
     json_path = RESULTS_DIR / f"{basename}.json"
     md_path = RESULTS_DIR / f"{basename}.md"
     latest_md = RESULTS_DIR / "latest.md"
-
-    with json_path.open("w") as f:
-        json.dump({"meta": meta, "summary": summary, "records": records}, f, indent=2)
-
-    md = render_markdown(records, summary, meta)
-    md_path.write_text(md)
-    latest_md.write_text(md)
 
     print(f"\nDone. Wrote:\n  {json_path}\n  {md_path}\n  {latest_md}")
     pw = summary["pairwise"]

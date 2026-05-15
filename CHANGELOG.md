@@ -4,6 +4,17 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.2.1] — 2026-05-14
+
+Eval harness reliability fixes.
+
+### Changed
+- All API calls (both generation and both judge calls) now retry on transient errors via a single `with_retry` helper. Handles `OverloadedError` (HTTP 529), `RateLimitError` (429), `APIConnectionError`, `APITimeoutError`, and 5xx server errors. Jittered exponential backoff, up to 6 attempts (~60s total worst-case wait).
+- `run_eval.py` now **checkpoints after every question** — JSON + Markdown snapshots are written incrementally so a mid-run crash never loses prior work.
+
+### Added
+- `--resume` flag picks up where an interrupted run stopped. Skips already-completed question IDs from the existing output file.
+
 ## [1.2.0] — 2026-05-14
 
 Adds an evaluation harness.

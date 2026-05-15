@@ -50,9 +50,17 @@ python evals/run_eval.py --limit 5                    # smoke test
 python evals/run_eval.py --candidate-model claude-sonnet-4-6
 python evals/run_eval.py --judge-model claude-opus-4-7
 python evals/run_eval.py --out-name 2026-05-15-sonnet
+
+# If a run was interrupted (network, API overload, Ctrl-C), resume it:
+python evals/run_eval.py --resume                     # picks up today's run
+python evals/run_eval.py --resume --out-name <name>   # resume a named run
 ```
 
 Cost for a full 20-question run: roughly **$1-3** (Sonnet candidate × 40 generations + Opus judge × 60 calls).
+
+### Reliability
+
+The harness checkpoints **after every question** — JSON + Markdown snapshots are written to `results/` as the run progresses. If the API gets overloaded (HTTP 529), rate-limited, or your connection drops, you won't lose prior work; `--resume` picks up where it stopped. All API calls (both generation and judging) retry with jittered exponential backoff (up to 6 attempts, ~60s total) on transient errors.
 
 ## Methodology notes (for the reviewer who wants to nitpick)
 

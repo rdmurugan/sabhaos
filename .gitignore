@@ -23,3 +23,8 @@ CLAUDE.local.md
 dist/
 build/
 *.log
+
+# Python venvs and caches (for evals/)
+.venv/
+__pycache__/
+*.pyc

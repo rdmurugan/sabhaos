@@ -29,16 +29,18 @@ Routing: <ROLE>.
 
 ### Default roles
 
-| Role | Covers |
-|------|--------|
-| **CIO**  | Infrastructure, deployment, hosting, security, devops, tooling, IT, vendors, cloud, data pipelines |
-| **CAIO** | AI strategy, LLMs, RAG, embeddings, prompt design, evals, model selection, AI product features, agents |
-| **CFO**  | Budget, revenue, pricing, cash flow, P&L, unit economics, runway, fundraising, taxes, accounting |
-| **CMO**  | Marketing, brand, positioning, content, SEO, lead gen, PLG, campaigns, copy, channels |
-| **CSO**  | Strategy, competition, partnerships, GTM, growth, market entry, M&A, big-bet decisions |
-| **CXO**  | UX, onboarding, retention, NPS, churn, service delivery, customer success, support |
-| **CHRO** | HR, hiring, firing, payroll, labor law, comp, performance, contractors, org design |
-| **CEO**  | Doesn't fit any role above, OR requires the user's own founder-level judgment to weigh competing roles |
+| Role | Covers | Depth |
+|------|--------|---|
+| **CIO**  | Infrastructure, deployment, hosting, security, devops, tooling, IT, vendors, cloud, data pipelines | — |
+| **CAIO** | AI strategy, LLMs, RAG, embeddings, prompt design, evals, model selection, AI product features, agents | — |
+| **CFO**  | Budget, revenue, pricing, cash flow, P&L, unit economics, runway, fundraising, taxes, accounting | **deep skill** — `skills/roles/cfo/` |
+| **CMO**  | Marketing, brand, positioning, content, SEO, lead gen, PLG, campaigns, copy, channels | **deep skill** — `skills/roles/cmo/` |
+| **CSO**  | Strategy, competition, partnerships, GTM, growth, market entry, M&A, big-bet decisions | — |
+| **CXO**  | UX, onboarding, retention, NPS, churn, service delivery, customer success, support | — |
+| **CHRO** | HR, hiring, firing, payroll, labor law, comp, performance, contractors, org design | — |
+| **CEO**  | Doesn't fit any role above, OR requires the user's own founder-level judgment to weigh competing roles | — |
+
+**Roles marked "deep skill"** load a richer knowledge layer when activated — reference frameworks, decision heuristics, fillable templates, procedural playbooks, and end-to-end worked examples. The router sends the question; the deep skill informs how the answer is constructed.
 
 > **Customize this.** Add, remove, or rename roles for your situation. A solo
 > founder might collapse CFO+CSO into "Operator." An agency might rename CIO to

@@ -4,6 +4,44 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.3.0] — 2026-05-14
+
+Deep role skills: CFO and CMO. This is the moat-building release — converts Sabha from "a routing prompt" to "a curated library of operator expertise packaged as a council."
+
+### Added
+- **`skills/roles/cfo/`** — full CFO skill (~3500 lines across 10 files):
+  - `SKILL.md` — activation discipline and answer structure
+  - `REFERENCE.md` — 12 frameworks (runway, burn multiple, unit economics, Rule of 40, capital allocation, value-based pricing, hire-vs-defer, fundraise narrative, cost-cut, scenario planning, behavioral biases, KPI scorecard)
+  - `heuristics.md` — fast-lookup decision triage and cognitive-bias quick-catches
+  - 4 templates — runway model, unit economics, pricing canvas, capital allocation matrix
+  - 3 playbooks — monthly close, fundraise prep, cost-cut decision
+  - 3 worked examples — seed-stage runway, SaaS pricing, hire-vs-defer
+  - `references.md` — Kahneman/Tversky, McKinsey, Skok, Wack, Klein, Kaplan & Norton citations
+- **`skills/roles/cmo/`** — full CMO skill (~3000 lines across 9 files):
+  - `SKILL.md` — activation discipline and answer structure
+  - `REFERENCE.md` — 12 frameworks (problem typing, JTBD + four forces, positioning canvas, Five Forces for channels, ICP definition, AARRR, channel portfolio, behavioral pricing, brand equity, cognitive biases, funnel honesty, when marketing can't fix it)
+  - `heuristics.md` — fast-lookup classification and bias-catches
+  - 3 templates — positioning statement, JTBD canvas, channel portfolio
+  - 2 playbooks — repositioning, channel allocation
+  - 2 worked examples — SaaS repositioning, channel allocation under budget pressure
+  - `references.md` — Christensen, Porter, Trout & Ries, Thaler/Sunstein, Aaker, McClure, Skok citations
+- CLAUDE.md role table now flags deep skills with a "Depth" column.
+- README has a new "Depth" section ahead of the eval section, explaining the layered architecture.
+
+### Changed
+- Plugin version bumped to 1.3.0 reflecting the architectural shift from prompt-only to prompt + curated knowledge base.
+
+### Strategic note
+The framework citations are real (Kahneman, Christensen, Porter, etc.) and reliably attributable to those authors and publication traditions. URL-level citations are deliberately omitted — see each role's `references.md` for the methodology note on why.
+
+## [1.2.2] — 2026-05-14
+
+Fix retry detection for `OverloadedError`.
+
+### Fixed
+- `_is_retryable` in `evals/judge.py` previously failed to detect `OverloadedError` in some SDK configurations — the import path silently became `None`, the fallback `getattr(exc, "status_code", None)` check returned `None`, and the exception fell through to a non-retry raise on the first attempt. The harness then died on the very 529 it was supposed to retry. Now matches by class name (independent of SDK version), checks status code via multiple attribute paths (`status_code`, `response.status_code`, `body`), and falls through to `isinstance(APIStatusError)` only as a last resort. Diagnostic prints on every classification so retry behavior is observable in the log.
+- Bumped retry policy: 10 attempts (was 6), max single delay capped at 30s, total worst-case wait ~180s. Anthropic overload windows are usually under 2 minutes; the harness now rides them out.
+
 ## [1.2.1] — 2026-05-14
 
 Eval harness reliability fixes.

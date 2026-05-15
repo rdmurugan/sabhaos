@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "run_date": "2026-05-14",
+    "candidate_model": "claude-sonnet-4-6",
+    "judge_model": "claude-opus-4-7"
+  },
+  "summary": {
+    "per_condition": {
+      "baseline": {
+        "decisiveness": 3.0,
+        "tradeoff_named": 4.0,
+        "concreteness": 4.0,
+        "routing_present": 0.0,
+        "length_discipline": 2.0,
+        "total": 13.0
+      },
+      "sabha": {
+        "decisiveness": 5.0,
+        "tradeoff_named": 5.0,
+        "concreteness": 5.0,
+        "routing_present": 1.0,
+        "length_discipline": 4.0,
+        "total": 19.0
+      }
+    },
+    "pairwise": {
+      "sabha": 1,
+      "baseline": 0,
+      "tie": 0
+    },
+    "n": 1
+  },
+  "records": [
+    {
+      "id": "cfo-01",
+      "role": "CFO",
+      "category": "cash",
+      "prompt": "We have $180K in the bank, burn is $32K/month, and there's a $90K invoice\nthat's been outstanding 40 days from a client we've worked with for two\nyears. Should I take on a $40K bridge line of credit at 12% APR to cover\npayroll, or chase the invoice harder?\n",
+      "replies": {
+        "baseline": "## Quick Analysis\n\nLet me cut through this clearly before giving you a recommendation.\n\n---\n\n## Your Actual Position\n\n| Item | Figure |\n|------|--------|\n| Cash on hand | $180K |\n| Monthly burn | $32K |\n| Runway (current) | **~5.6 months** |\n| Runway if invoice never pays | **~5.6 months** |\n\n**You're not in a cash crisis right now.** That changes the calculus significantly.\n\n---\n\n## The Real Question You Should Be Asking\n\n> *Why is a 2-year client 40 days out on a $90K invoice?*\n\nThat's the signal worth reading carefully.\n\n**Benign explanations:**\n- AP process slowdown, new approval layers\n- Temporary cash pressure on their end\n- Invoice got lost or disputed quietly\n\n**Concerning explanations:**\n- They're in financial trouble\n- Relationship has shifted and nobody told you\n- They're stalling because of a dispute they haven't voiced\n\n**At 40 days you genuinely don't know which this is yet**, and that matters more than the credit line math.\n\n---\n\n## The Credit Line Math (Straight Answer)\n\n$40K at 12% APR \u2248 **$400/month in interest**\n\nThat's not the problem. The problems are:\n\n- You don't actually need it *yet* based on your runway\n- Taking it doesn't recover your $90K\n- It can create a **false comfort** that reduces urgency on the invoice\n- If the invoice is truly at risk, $40K doesn't solve a $90K problem anyway\n\n---\n\n## What I'd Actually Do\n\n### This week - Escalate the invoice directly\n\n- **Pick up the phone today** - not email. Email lets people defer.\n- Talk to your day-to-day contact *and* someone in finance/AP\n- Ask plainly: *\"Is there anything on your end holding this up that I should know about?\"*\n- That question surfaces disputes or financial trouble they won't volunteer\n\n### Get a specific commitment\n- Not \"we'll process it soon\" - get a **date and a name**\n- Confirm in writing after the call\n\n### Assess within 7 days\n- If you get a credible payment date within 2 weeks \u2192 **skip the credit line**\n- If you get vague answers, missed callbacks, or excuses \u2192 **something is wrong**\n\n---\n\n## Decision Framework\n\n```\nInvoice response in 7 days?\n\u2502\n\u251c\u2500\u2500 YES - clear date within 2 weeks\n\u2502     \u2514\u2500\u2500 Skip the line of credit entirely\n\u2502\n\u251c\u2500\u2500 YES - but vague / 30+ more days\n\u2502     \u2514\u2500\u2500 Open the line of credit as insurance\n\u2502         AND consult a collections attorney\n\u2502\n\u2514\u2500\u2500 NO - stonewalling, no response\n      \u2514\u2500\u2500 Open the line immediately\n          Engage collections / legal counsel\n          This invoice may be impaired\n```\n\n---\n\n## One Honest Caution\n\n**Don't let the credit line become a reason to go soft on the invoice.**\n\nThe $40K costs you money. The $90K already earned is yours. Those are two separate problems and the invoice deserves your full attention regardless of what you decide on the credit line.\n\n---\n\n**Bottom line:** Chase the invoice hard *this week* with a direct conversation, then make the credit line decision based on what you learn. Right now you have enough runway to get a real answer before committing to debt costs.",
+        "sabha": "Routing: CFO (primary). CSO weighs in on client relationship risk.\n\n---\n\n## Chase the invoice. Hard. Now.\n\nYour numbers:\n\n- **Runway as-is:** $180K \u00f7 $32K = **5.6 months**\n- **Runway if invoice clears:** $270K \u00f7 $32K = **8.4 months**\n- **Cost of the $40K line at 12% APR:** ~$400/month in interest, plus origination. You don't need it yet.\n\nYou have 5+ months of runway. You are not in a payroll emergency. Taking on debt to avoid an uncomfortable conversation is expensive avoidance.\n\n---\n\n## The invoice play\n\n**Day 1 (today):** CEO-to-CEO or CEO-to-CFO call. Not email. Two years of relationship earns you a direct conversation. Say: *\"The invoice is 40 days out. I need to understand what's blocking it.\"*\n\nThree likely answers:\n1. **It's stuck in AP** \u2192 get a payment date commitment today, follow up in writing within the hour.\n2. **They're having their own cash problem** \u2192 negotiate: 50% now, 50% in 30 days. Partial is better than a line of credit.\n3. **There's a dispute you didn't know about** \u2192 now you know. Deal with it before day 60, when this gets ugly.\n\n**Day 3 (if no commitment):** Written notice that work pauses at day 60 outstanding unless a payment plan is in place. Not a threat \u2014 a policy. Put it in writing.\n\n**Day 7 (if still nothing):** Loop in a collections attorney for a demand letter. In most jurisdictions, the letter alone moves 70%+ of stuck invoices.\n\n---\n\n## On the line of credit\n\nDon't close the door on it \u2014 **apply now, draw never** (or draw only if the invoice craters past 90 days with no resolution). Getting approved takes time. Approval costs nothing. Drawing costs 12%.\n\nIf the invoice goes uncollected entirely, your effective runway drops to 3.5 months and *then* you take the line while you replace the revenue. But that's a different decision on different facts.\n\n---\n\n## The tradeoff\n\nTaking the line now costs ~$400\u2013500/month and signals to yourself that you've accepted the invoice is lost. Chasing it costs you one hard phone call. Make the call.\n\n---\n\n*Want me to draft the call script and the follow-up written notice as a memo?*"
+      },
+      "scores": {
+        "baseline": {
+          "decisiveness": 3,
+          "tradeoff_named": 4,
+          "concreteness": 4,
+          "routing_present": 0,
+          "length_discipline": 2,
+          "total": 13,
+          "rationale": "No 'Routing:' line at the open, and the reply is heavily padded with tables, headers, and ASCII diagrams that dilute an otherwise reasonable recommendation."
+        },
+        "sabha": {
+          "decisiveness": 5,
+          "tradeoff_named": 5,
+          "concreteness": 5,
+          "routing_present": 1,
+          "length_discipline": 4,
+          "total": 19,
+          "rationale": "Slight padding with section headers and closing offer, but every section earns its place; otherwise excellent on all axes."
+        }
+      },
+      "pairwise": {
+        "winner": "sabha",
+        "rationale": "Reply A is more decisive with a concrete day-by-day action plan and the sharp 'apply now, draw never' insight, while B covers similar ground with more framing and less operational specificity."
+      }
+    }
+  ]
+}

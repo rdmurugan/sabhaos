@@ -105,6 +105,24 @@ Most AI replies are *option-shaped*: *"here are three approaches, with pros and 
 4. **Mode discipline.** Ask = chat. Engage = file it. No fifteen-page replies to a one-line question.
 5. **A memory of you.** With a local memory MCP wired in, every reply draws on your accumulated Sakthi — your decisions, your people, your projects.
 
+## Depth — each role is a skill, not a voice tweak
+
+Two roles are now built out as **deep skills** (more coming):
+
+- [`skills/roles/cfo/`](./skills/roles/cfo/) — runway models, unit economics, capital allocation, pricing canvas, fundraise prep, cost-cut playbooks. Draws on Kahneman/Tversky on heuristics, McKinsey on capital allocation, Skok on SaaS unit economics, the Wack lineage on scenario planning, and Kaplan & Norton on performance measurement. See [`skills/roles/cfo/REFERENCE.md`](./skills/roles/cfo/REFERENCE.md).
+- [`skills/roles/cmo/`](./skills/roles/cmo/) — positioning, Jobs-to-be-Done, channel portfolio, repositioning, behavioral pricing. Draws on Christensen on JTBD, Porter on Five Forces, Trout & Ries on positioning, Thaler & Sunstein on choice architecture, Aaker on brand equity, McClure on pirate metrics. See [`skills/roles/cmo/REFERENCE.md`](./skills/roles/cmo/REFERENCE.md).
+
+Each deep skill ships with:
+
+- A **REFERENCE** layer of frameworks with numerical thresholds and citations.
+- A **heuristics** layer for fast triage and bias-catching.
+- **Templates** — fillable artifacts (runway model, unit economics sheet, pricing canvas, capital allocation matrix, positioning statement, JTBD canvas, channel portfolio).
+- **Playbooks** — procedural workflows (monthly close, fundraise prep, cost-cut decision, repositioning, channel allocation).
+- **Worked examples** — end-to-end scenarios showing the framework being applied with real numbers.
+- **References** — citations to the body of work each framework draws from.
+
+This is what differentiates Sabha from a system prompt. The protocol routes; the deep skills *answer*.
+
 ## Does it actually work?
 
 A reproducible eval ships in [`evals/`](./evals/). 20 operator-style questions, each run twice — once with no system prompt (baseline) and once with the Sabha charter loaded. Both replies are judged by an LLM-as-judge on five axes (decisiveness, tradeoff-named, concreteness, routing-present, length-discipline) plus pairwise preference.
@@ -127,7 +145,10 @@ sabha-os/
 ├── .claude-plugin/
 │   └── plugin.json                  # Claude Code plugin manifest
 ├── skills/
-│   └── sabha-router/SKILL.md        # Forces the routing on every reply
+│   ├── sabha-router/SKILL.md        # Forces the routing on every reply
+│   └── roles/
+│       ├── cfo/                     # Deep CFO skill (REFERENCE, heuristics, templates, playbooks, worked examples)
+│       └── cmo/                     # Deep CMO skill (same structure)
 ├── commands/
 │   ├── engage.md                    # /engage — switch to engage mode
 │   ├── ask.md                       # /ask — back to chat mode

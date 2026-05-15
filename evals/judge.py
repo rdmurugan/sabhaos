@@ -38,40 +38,99 @@ except ImportError:  # older SDK — fall through to status-code matching
 T = TypeVar("T")
 
 # HTTP status codes that are worth retrying.
-_RETRY_STATUS = {408, 409, 429, 500, 502, 503, 504, 529}
+_RETRY_STATUS = {408, 409, 425, 429, 500, 502, 503, 504, 529}
+
+# Class names that should always be retried, regardless of whether the SDK
+# version exposes them at the top level. Match by name so import variations
+# across SDK versions don't silently break detection.
+_RETRY_EXC_NAMES = {
+    "OverloadedError",
+    "RateLimitError",
+    "APIConnectionError",
+    "APITimeoutError",
+    "APIResponseValidationError",
+    "InternalServerError",
+}
+
+
+def _status_code_of(exc: BaseException) -> Optional[int]:
+    """Pull the HTTP status code off an anthropic exception via multiple paths."""
+    sc = getattr(exc, "status_code", None)
+    if sc:
+        return sc
+    response = getattr(exc, "response", None)
+    if response is not None:
+        sc = getattr(response, "status_code", None)
+        if sc:
+            return sc
+    body = getattr(exc, "body", None)
+    if isinstance(body, dict):
+        sc = body.get("status_code") or body.get("status")
+        if isinstance(sc, int):
+            return sc
+    return None
 
 
 def _is_retryable(exc: BaseException) -> bool:
-    """Return True for errors a retry might recover from."""
+    """Return True for errors a retry might recover from. Defensive: match by
+    class name AND isinstance AND status code, so SDK import quirks don't drop
+    real retryable errors on the floor (which is the bug that bit us on 1.2.1)."""
+    # 1. Class-name match (independent of which SDK version is installed).
+    if type(exc).__name__ in _RETRY_EXC_NAMES:
+        return True
+
+    # 2. isinstance against whatever the SDK exposes.
     if isinstance(exc, (RateLimitError, APIConnectionError, APITimeoutError)):
         return True
     if OverloadedError is not None and isinstance(exc, OverloadedError):
         return True
+
+    # 3. Status code match — works even on APIStatusError instances of unknown
+    #    concrete class.
     if isinstance(exc, APIStatusError):
-        return getattr(exc, "status_code", None) in _RETRY_STATUS
+        sc = _status_code_of(exc)
+        if sc in _RETRY_STATUS:
+            return True
+
     return False
 
 
 def with_retry(
     fn: Callable[[], T],
-    max_attempts: int = 6,
+    max_attempts: int = 10,
     base_delay: float = 2.0,
+    max_single_delay: float = 30.0,
     label: str = "",
 ) -> T:
     """Run `fn` with jittered exponential backoff on transient API errors.
 
-    Total worst-case wait at defaults: ~2 + 4 + 8 + 16 + 32 = 62 seconds across
-    5 retries before the final attempt. Overloaded errors usually clear inside
-    that window.
+    Defaults: 10 attempts, base 2s, cap single delay at 30s. Worst-case wait
+    across 9 retries: 2 + 4 + 8 + 16 + 30 + 30 + 30 + 30 + 30 ≈ 180s (3 min).
+    Anthropic API overload windows are usually under 2 minutes; this should
+    ride them out.
     """
     for attempt in range(max_attempts):
         try:
             return fn()
         except Exception as exc:  # noqa: BLE001
-            if attempt == max_attempts - 1 or not _is_retryable(exc):
-                raise
-            delay = base_delay * (2 ** attempt) + random.uniform(0, base_delay)
+            retryable = _is_retryable(exc)
             tag = f"[{label}] " if label else ""
+            if not retryable:
+                print(
+                    f"    {tag}attempt {attempt + 1}/{max_attempts} hit "
+                    f"non-retryable {type(exc).__name__}; raising.",
+                    flush=True,
+                )
+                raise
+            if attempt == max_attempts - 1:
+                print(
+                    f"    {tag}giving up after {max_attempts} attempts on "
+                    f"{type(exc).__name__}.",
+                    flush=True,
+                )
+                raise
+            raw_delay = base_delay * (2 ** attempt)
+            delay = min(raw_delay, max_single_delay) + random.uniform(0, base_delay)
             print(
                 f"    {tag}attempt {attempt + 1}/{max_attempts} hit "
                 f"{type(exc).__name__}; sleeping {delay:.1f}s...",

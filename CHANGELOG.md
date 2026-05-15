@@ -4,6 +4,13 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.3.1] — 2026-05-14
+
+Eval harness now exercises deep role skills.
+
+### Fixed
+- The 1.3.0 eval harness only loaded `CLAUDE.md` as the Sabha system prompt — meaning the deep role skills (CFO, CMO) added in 1.3.0 were *not* being tested. The harness would have reported v1.2.x-equivalent numbers despite the depth shipping. Now, when a question's `role:` tag matches an existing `skills/roles/<role>/` directory, the harness appends that skill's `SKILL.md` + `REFERENCE.md` + `heuristics.md` to the system prompt for the Sabha condition. The per-question results table flags this with a `deep skill ✓` column. Without this fix, the eval was unintentionally a v1.0 protocol test, not a v1.3 product test.
+
 ## [1.3.0] — 2026-05-14
 
 Deep role skills: CFO and CMO. This is the moat-building release — converts Sabha from "a routing prompt" to "a curated library of operator expertise packaged as a council."

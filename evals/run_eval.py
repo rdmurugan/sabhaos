@@ -60,21 +60,58 @@ def load_sabha_system_prompt() -> str:
     return CLAUDE_MD_PATH.read_text()
 
 
+ROLES_DIR = REPO_ROOT / "skills" / "roles"
+# Files from a deep role skill that should be loaded into context to simulate
+# the skill having activated. SKILL.md tells the model HOW to use the deep
+# content; REFERENCE.md and heuristics.md ARE the deep content. Templates,
+# playbooks, and worked examples are referenced by name and don't need to be
+# pre-loaded.
+_DEEP_SKILL_FILES = ("SKILL.md", "REFERENCE.md", "heuristics.md")
+
+
+def load_deep_skill_for_role(role: Optional[str]) -> str:
+    """Return concatenated deep-skill content for a role, or '' if no deep skill exists.
+
+    In Claude Code, deep role skills activate via the skill router. The eval
+    harness uses the raw API, so we simulate activation by appending the deep
+    skill's core files (SKILL + REFERENCE + heuristics) to the system prompt
+    for the matching role. This makes the eval test what users actually
+    experience with sabha-os installed, not just the bare CLAUDE.md.
+    """
+    if not role:
+        return ""
+    role_dir = ROLES_DIR / role.lower()
+    if not role_dir.exists():
+        return ""
+    parts: list[str] = [f"\n\n---\n# DEEP SKILL: {role.upper()}\n---\n"]
+    for fname in _DEEP_SKILL_FILES:
+        path = role_dir / fname
+        if path.exists():
+            parts.append(f"\n\n## {fname}\n\n{path.read_text()}")
+    return "".join(parts) if len(parts) > 1 else ""
+
+
 def generate_reply(
     client: Anthropic,
     model: str,
     question: str,
     condition: str,
     sabha_system: str,
+    role: Optional[str] = None,
 ) -> str:
-    """Run the candidate model under the given condition (with retries on transient errors)."""
+    """Run the candidate model under the given condition (with retries on transient errors).
+
+    When `condition == "sabha"` and the question has a tagged role with a
+    matching deep skill on disk, the deep skill's content is appended to the
+    system prompt to simulate skill activation in Claude Code.
+    """
     kwargs = {
         "model": model,
         "max_tokens": 1200,
         "messages": [{"role": "user", "content": question}],
     }
     if condition == "sabha":
-        kwargs["system"] = sabha_system
+        kwargs["system"] = sabha_system + load_deep_skill_for_role(role)
     response = with_retry(
         lambda: client.messages.create(**kwargs),
         label=f"gen:{condition}",
@@ -98,7 +135,12 @@ def run_question(
     replies: dict[str, str] = {}
     for condition in CONDITIONS:
         replies[condition] = generate_reply(
-            client, candidate_model, prompt, condition, sabha_system
+            client,
+            candidate_model,
+            prompt,
+            condition,
+            sabha_system,
+            role=question.get("role"),
         )
 
     print(f"  [{qid}] judging...", flush=True)
@@ -117,10 +159,12 @@ def run_question(
         seed=seed,
     )
 
+    deep_skill_loaded = bool(load_deep_skill_for_role(question.get("role")))
     return {
         "id": qid,
         "role": question.get("role"),
         "category": question.get("category"),
+        "deep_skill_loaded": deep_skill_loaded,
         "prompt": prompt,
         "replies": replies,
         "scores": {
@@ -226,11 +270,13 @@ def render_markdown(records: list[dict], summary: dict, meta: dict) -> str:
     lines.append("")
     lines.append("## Per-question results")
     lines.append("")
-    lines.append("| id | role | pairwise winner | Sabha total | Baseline total |")
-    lines.append("|---|---|---|---:|---:|")
+    lines.append("| id | role | deep skill | pairwise winner | Sabha total | Baseline total |")
+    lines.append("|---|---|---|---|---:|---:|")
     for rec in records:
+        deep = "✓" if rec.get("deep_skill_loaded") else "—"
         lines.append(
-            f"| `{rec['id']}` | {rec['role']} | **{rec['pairwise']['winner']}** "
+            f"| `{rec['id']}` | {rec['role']} | {deep} "
+            f"| **{rec['pairwise']['winner']}** "
             f"| {rec['scores']['sabha']['total']} "
             f"| {rec['scores']['baseline']['total']} |"
         )

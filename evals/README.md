@@ -65,6 +65,7 @@ The harness checkpoints **after every question** — JSON + Markdown snapshots a
 ## Methodology notes (for the reviewer who wants to nitpick)
 
 - **Candidate model held constant across conditions.** Only the system prompt differs. We're testing the *protocol's* effect, not the model's.
+- **Deep role skills (v1.3.0+) are simulated.** In Claude Code, deep role skills under `skills/roles/<role>/` activate via the skill router. The eval harness uses the raw Anthropic API and has no router, so when a question's `role:` tag matches an existing deep skill directory, the harness appends that skill's `SKILL.md` + `REFERENCE.md` + `heuristics.md` to the system prompt for the Sabha condition. The `deep_skill_loaded` column in the per-question results table flags which rows included this content. Without this simulation, the eval would test only CLAUDE.md and miss the v1.3.0 depth layer entirely.
 - **Judge is a different model class than candidate** by default (Opus judges Sonnet) to reduce self-bias. You can flip with `--judge-model claude-sonnet-4-6`.
 - **Pairwise order randomized** per question, seeded by `--seed`. Avoids position bias.
 - **Three retries on API errors** with exponential backoff. Network blips don't kill a run.

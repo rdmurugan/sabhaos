@@ -4,7 +4,7 @@
 
 > 👋 **New here and not a developer?** Start with [docs/QUICKSTART.md](./docs/QUICKSTART.md) — a 10-minute, no-installation guide to get Sabha working inside Claude.ai. No terminal, no Git, no command-line.
 
-**Sabha** (सभा, சபை, Sanskrit for *council*) is a routing protocol for Claude. **Chanakya**  (சாணக்யா, the original strategic advisor, author of the *Arthashastra*) is the archetype it embodies. **Sakthi** (शक्ति, சக்தி, Sanskrit/Tamil for *power*) is what it builds — your accumulated knowledge of decisions, people, and projects, stored in local memory only you own.
+**Sabha** (சபை, सभा, Sanskrit for *council*) is a routing protocol for Claude. **Chanakya**  (சாணக்யா, the original strategic advisor, author of the *Arthashastra*) is the archetype it embodies. **Sakthi** (சக்தி, शक्ति, Sanskrit/Tamil for *power*) is what it builds — your accumulated knowledge of decisions, people, and projects, stored in local memory only you own.
 
 Most AI replies are option-shaped: *"here are five approaches with pros and cons."* That's exhausting when you're running something. Sabha forces a Chanakya-style answer instead: a role, a recommendation, a tradeoff. And it remembers.
 

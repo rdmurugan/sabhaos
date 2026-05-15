@@ -2,6 +2,8 @@
 
 > An open-source protocol for a local-first AI council. A Chanakya in your terminal, with memory of every decision. Builds your **Sakthi**.
 
+> 👋 **New here and not a developer?** Start with [docs/QUICKSTART.md](./docs/QUICKSTART.md) — a 10-minute, no-installation guide to get Sabha working inside Claude.ai. No terminal, no Git, no command-line.
+
 **Sabha** (सभा, Sanskrit for *council*) is a routing protocol for Claude. **Chanakya** (the original strategic advisor, author of the *Arthashastra*) is the archetype it embodies. **Sakthi** (शक्ति, Sanskrit/Tamil for *power*) is what it builds — your accumulated knowledge of decisions, people, and projects, stored in local memory only you own.
 
 Most AI replies are option-shaped: *"here are five approaches with pros and cons."* That's exhausting when you're running something. Sabha forces a Chanakya-style answer instead: a role, a recommendation, a tradeoff. And it remembers.
@@ -154,6 +156,7 @@ sabha-os/
 │   ├── ask.md                       # /ask — back to chat mode
 │   └── route.md                     # /route <ROLE> — force a specific role
 ├── docs/
+│   ├── QUICKSTART.md                # No-install path for non-technical users
 │   ├── CUSTOMIZATION.md
 │   ├── PHILOSOPHY.md
 │   └── ROLES.md

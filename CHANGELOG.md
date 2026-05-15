@@ -4,6 +4,11 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [Unreleased]
+
+### Added
+- `docs/QUICKSTART.md` — 10-minute no-installation guide for non-technical users. Walks through using Sabha entirely inside Claude.ai (no terminal, no Git, no command-line). Linked prominently from the top of the README.
+
 ## [1.3.1] — 2026-05-14
 
 Eval harness now exercises deep role skills.

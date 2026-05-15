@@ -4,6 +4,35 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.5.0] — 2026-05-14
+
+Live-data grounding scaffold — data hooks for CFO and CMO.
+
+This is the v2.0 moat play, shipped early as a documented pattern. Sabha now turns from *"council that remembers"* into *"council that knows"* whenever the operator wires a relevant data MCP into Claude Code. CFO can read Stripe / QuickBooks. CMO can read Google Analytics. The pattern generalizes to any deep role + any data MCP.
+
+### Added
+- **`skills/roles/cfo/data-hooks/`** — three files:
+  - `README.md` — when to reach for a data hook, available hooks, the grounding discipline that still applies, extension instructions.
+  - `stripe.md` — full integration doc for Stripe-flavored MCPs. Tool shapes, when to reach, worked example (runway question with live Stripe + banking data), Stripe-specific grounding rules (MRR vs recognized revenue, collected vs booked, currency, disputes, test mode), and anti-patterns. Concludes by naming what Stripe data can't answer.
+  - `quickbooks.md` — same pattern for QuickBooks-flavored (and Xero, etc.) MCPs. Worked example: expense triage with real category breakdown showing the STARK ordering applied to live data.
+
+- **`skills/roles/cmo/data-hooks/`** — two files:
+  - `README.md` — same pattern as CFO data-hooks.
+  - `google-analytics.md` — full integration doc for GA4-flavored MCPs. Tool shapes, when to reach, worked example (funnel-breakage diagnosis with live GA + Stripe data, routes the activation gap to CXO), attribution-model warnings, sampling caveats, and anti-patterns.
+
+- **CFO and CMO `SKILL.md`** updated with a 7th discipline step: "Reach for a data hook if real numbers are needed and an MCP is connected." Replaces "ask user to retype" with "pull and cite."
+
+- **CLAUDE.md MEMORY section** — new "Data MCPs for real-time grounding" subsection. Cross-links to the role data-hooks directories. Reinforces that data from MCPs is *citable with source + timestamp*, not infallible.
+
+### Why this matters
+- The 1.4.0 grounding discipline closed the "confidently invents numbers" failure mode by requiring assertions to be cited or flagged. But it left the operator doing the data-fetching work manually. 1.5.0 closes the rest of that loop: when the data lives in a system the user already pays for (Stripe, QuickBooks, GA), the council reaches in and pulls it.
+- This is the moat play. Anyone can fork the protocol; the curated data-hook docs per (role × MCP) are a 12-month build cycle to replicate. By the time a competitor copies the pattern, the docs have grown to cover banking, payroll, CRM, ad platforms, support tickets, product analytics, code quality, and more.
+
+### Not yet shipped
+- Tool-by-tool execution examples (i.e., concrete tool-name signatures for specific Stripe MCPs). The data-hook docs intentionally stay MCP-agnostic — naming *shapes* not *vendors*. We'll add vendor-specific tool tables when the relevant MCP ecosystem settles.
+- Banking, payroll, ad-platform, CRM, support, product-analytics data hooks. The pattern is established; these are content additions, not architectural ones. Welcome PRs.
+- An eval question set that specifically tests data-hook grounding (e.g., "compute runway" with Stripe + banking MCPs connected, judged on whether the answer cites real numbers vs invents).
+
 ## [1.4.0] — 2026-05-14
 
 Grounding discipline — every assertion is cited, sourced, or flagged.

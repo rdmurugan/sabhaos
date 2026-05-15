@@ -80,6 +80,29 @@ first, answer second**.
 To swap in a different memory layer (mem0, Letta, Zep, Pieces, or a local
 `memory/` folder of markdown), see [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).
 
+### Data MCPs — for real-time grounding (1.5+)
+
+Memory MCPs hold what the user *told you*. Data MCPs hold what the user's
+*systems know* — current Stripe MRR, real QuickBooks expense breakdown, live
+Google Analytics funnel, banking balances, CRM pipeline. When a data MCP is
+connected, the council reaches into it for the actual number rather than
+asking the user to retype it (or worse, inventing it).
+
+Deep-skilled roles document their data hooks per-MCP:
+
+- CFO: [`skills/roles/cfo/data-hooks/`](./skills/roles/cfo/data-hooks/) — Stripe, QuickBooks, banking, payroll
+- CMO: [`skills/roles/cmo/data-hooks/`](./skills/roles/cmo/data-hooks/) — Google Analytics, HubSpot, Intercom, ad platforms
+
+Each data-hook doc covers: when to reach for it, tool-call shapes, grounding
+rules specific to that data source, anti-patterns, and a worked example.
+The protocol stays MCP-agnostic — Sabha doesn't bless one Stripe MCP over
+another; it describes the *shape* of integration so any compatible MCP works.
+
+Grounding discipline (§3) still applies: numbers pulled from data MCPs get
+cited with source + timestamp. *"Per Stripe (last 30d collected, as of
+2026-05-14 09:00 UTC), net MRR is $32,400."* Live data is citable, not
+infallible.
+
 ### Known entities (user, edit this)
 
 The user maintains these entities. Two formats — start with the **flat list**

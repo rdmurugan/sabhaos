@@ -4,10 +4,26 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
-## [Unreleased]
+## [1.4.0] — 2026-05-14
+
+Grounding discipline — every assertion is cited, sourced, or flagged.
 
 ### Added
-- `docs/QUICKSTART.md` — 10-minute no-installation guide for non-technical users. Walks through using Sabha entirely inside Claude.ai (no terminal, no Git, no command-line). Linked prominently from the top of the README.
+- **Grounding discipline section in CLAUDE.md §3 (ANSWER).** Closes the "confidently-wrong" failure mode: if a reply asserts a number, name, or date, it must (a) cite the source, (b) attribute to the user, or (c) explicitly flag as estimate/assumption. Never present an invented number as a fact. This is a behavior-changing addition to the protocol; it applies in every role, with or without a deep skill loaded.
+- **Entity profile cards** as the recommended format for the MEMORY section in CLAUDE.md. Flat list (the prior format) is kept as the minimum-viable starter; profile cards (one prose paragraph per entity) give the council real anchors and let it refuse to invent attributes that contradict the profile. Three sentences per entity is enough.
+- Grounding discipline echoed into the deep CFO and CMO skills with role-specific warnings:
+  - **CFO** is most at risk of inventing financial numbers — anti-pattern updated explicitly.
+  - **CMO** is most at risk of inventing customer language and CAC benchmarks — anti-pattern updated explicitly.
+- Grounding discipline added to the `sabha-router` skill so it applies on every routed reply, not just deep-skill roles.
+- `docs/QUICKSTART.md` (carried over from Unreleased) — 10-minute no-installation guide for non-technical users.
+
+### Why
+- Sabha's strongest pitch is *"decisive, tradeoff-aware counsel."* But a confident reply in a CFO voice is **worse** than a hedged generic reply if the numbers are invented. Decisive without grounding is theatre. This release closes the gap with zero-data-cost: the model now self-marks confidence on every fact.
+- Eval finding (1.3.1, n=20): the three baseline pairwise wins all involved questions where Sabha could have invented data instead of reframing the question. Grounding discipline + reframing discipline (next release) target this directly.
+
+### Not yet shipped (roadmap)
+- **v1.5.0:** reframe-the-question discipline (handles the 3 baseline-win failure modes from the eval). Skill-level rule: if the user's premise contains an unstated infeasibility or a wrong frame, challenge the premise before answering.
+- **v2.0.0:** live-data MCP integrations — CFO reads Stripe / QuickBooks; CMO reads Google Analytics / HubSpot; CIO reads AWS Cost Explorer. This is the moat play. See `docs/PHILOSOPHY.md` and CSO read in prior sessions for the rationale.
 
 ## [1.3.1] — 2026-05-14
 

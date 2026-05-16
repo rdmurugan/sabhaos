@@ -128,10 +128,11 @@ Most AI replies are *option-shaped*: *"here are three approaches, with pros and 
 
 ## Depth — each role is a skill, not a voice tweak
 
-Two roles are now built out as **deep skills** (more coming):
+Three roles are now built out as **deep skills** (more coming):
 
 - [`skills/roles/cfo/`](./skills/roles/cfo/) — runway models, unit economics, capital allocation, pricing canvas, fundraise prep, cost-cut playbooks. Draws on Kahneman/Tversky on heuristics, McKinsey on capital allocation, Skok on SaaS unit economics, the Wack lineage on scenario planning, and Kaplan & Norton on performance measurement. See [`skills/roles/cfo/REFERENCE.md`](./skills/roles/cfo/REFERENCE.md).
 - [`skills/roles/cmo/`](./skills/roles/cmo/) — positioning, Jobs-to-be-Done, channel portfolio, repositioning, behavioral pricing. Draws on Christensen on JTBD, Porter on Five Forces, Trout & Ries on positioning, Thaler & Sunstein on choice architecture, Aaker on brand equity, McClure on pirate metrics. See [`skills/roles/cmo/REFERENCE.md`](./skills/roles/cmo/REFERENCE.md).
+- [`skills/roles/clc/`](./skills/roles/clc/) — Chief Legal Counsel framing: contracts (MSA/NDA/SOW), IP (trademark, copyright, patent, trade secret, IP assignment), privacy (GDPR/CCPA/EU AI Act), corporate (entity, board, securities), employment-legal, regulatory, litigation framing. Risk-tier triage (red/yellow/green) on every reply, with explicit hand-off to licensed counsel where required. Draws on Restatement of Contracts, Fisher & Ury on negotiation, USPTO/Lanham Act for IP, GDPR/CCPA/EU AI Act for privacy, Delaware GCL for corporate, FAA + AAA for dispute resolution. See [`skills/roles/clc/REFERENCE.md`](./skills/roles/clc/REFERENCE.md). **Note:** this skill provides operator-grade legal framing, NOT legal advice.
 
 Each deep skill ships with:
 

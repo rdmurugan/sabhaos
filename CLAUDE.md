@@ -38,6 +38,7 @@ Routing: <ROLE>.
 | **CSO**  | Strategy, competition, partnerships, GTM, growth, market entry, M&A, big-bet decisions | — |
 | **CXO**  | UX, onboarding, retention, NPS, churn, service delivery, customer success, support | — |
 | **CHRO** | HR, hiring, firing, payroll, labor law, comp, performance, contractors, org design | — |
+| **CLC**  | Contracts, IP, privacy/compliance, corporate/board, securities, regulatory, employment-legal, litigation framing | **deep skill** — `skills/roles/clc/` |
 | **CEO**  | Doesn't fit any role above, OR requires the user's own founder-level judgment to weigh competing roles | — |
 
 **Roles marked "deep skill"** load a richer knowledge layer when activated — reference frameworks, decision heuristics, fillable templates, procedural playbooks, and end-to-end worked examples. The router sends the question; the deep skill informs how the answer is constructed.

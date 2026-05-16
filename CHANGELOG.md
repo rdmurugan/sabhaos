@@ -4,6 +4,34 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.8.0] — 2026-05-16
+
+Chief Legal Counsel (CLC) — new deep skill, third role with framework grounding.
+
+### Added
+- **`skills/roles/clc/`** — full CLC skill following the CFO/CMO pattern. The role provides operator-grade legal framing (NOT legal advice) with explicit risk-tier triage and counsel hand-off:
+  - `SKILL.md` — activation discipline + the "not legal advice" guardrails. Every CLC reply ends with one of: operator-handleable / operator-handleable with attorney review / stop-and-call-counsel.
+  - `REFERENCE.md` — 12 frameworks: risk-tier triage, contract review (standard terms), NDA review, IP four-pillars (trademark, copyright, patent, trade secret), privacy (GDPR/CCPA/EU AI Act), corporate (entity, board, cap table), employment-legal, securities, litigation, regulatory, contract drafting rails, the "translate before reading" frame.
+  - `heuristics.md` — fast-lookup risk-tier classifier, "when to call which kind of attorney" table, contract / IP / privacy / employment / securities heuristics, bias quick-catches.
+  - 4 templates — `risk-tier-classifier.md`, `nda-review-checklist.md`, `msa-negotiation-positions.md`, `ip-assignment-essentials.md`, `privacy-policy-skeleton.md`.
+  - 3 playbooks — `customer-contract-review.md`, `cease-and-desist-response.md`, `trademark-registration.md`.
+  - 2 worked examples — MSA review under enterprise pressure; co-founder departure with IP at issue.
+  - `references.md` — Restatement of Contracts, Fisher & Ury, Mnookin, Cooley GO, Common Paper, USPTO / Lanham Act / 17 U.S.C. / 35 U.S.C. / DTSA, GDPR / CCPA / EU AI Act / HIPAA, DGCL, Securities Act, Reg D, YC SAFEs, NVCA, Feld & Mendelson, FLSA / CA Labor Code, FRCP, FAA, AAA / JAMS, plus industry-specific regulators.
+
+### Changed
+- **CLAUDE.md role table** — CLC added as the 9th role with the "deep skill" marker. Slotted between CHRO and CEO.
+- **Plugin manifest** — `./skills/roles/clc` registered alongside cfo and cmo.
+- **README "Depth" section** — three deep skills now (CFO, CMO, CLC). Explicit note that the CLC skill provides legal framing, not legal advice.
+- **docs/ROLES.md** — CLC entry added with voice description and sample answer shape.
+
+### Why CLC matters
+- Legal questions are some of the most frequent ones operators face (contracts every week, IP questions every month, privacy questions every quarter).
+- Operators currently route them to expensive generalist attorneys for matters that don't need attorney involvement, OR skip the legal frame entirely on matters that do need it.
+- CLC's risk-tier triage (red/yellow/green) plus the named-specialist hand-off captures most of the operator-grade value an experienced general counsel provides — at AI-cost rather than $500/hr.
+
+### Discipline note
+CLC is the highest-risk deep skill we've shipped because incorrect legal framing has expensive downside. The skill is explicit on this: every reply names the risk tier; RED-tier replies refuse to substantively engage and route to licensed counsel; specific statutes / cases / regulatory citations are flagged for verification.
+
 ## [1.7.0] — 2026-05-14
 
 Bundle MemPalace alongside Sabha OS in the same marketplace.

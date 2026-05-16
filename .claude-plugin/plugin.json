@@ -27,13 +27,7 @@
     "sabha"
   ],
   "skills": [
-    "skills/sabha-router",
-    "skills/roles/cfo",
-    "skills/roles/cmo"
-  ],
-  "commands": [
-    "commands/ask.md",
-    "commands/engage.md",
-    "commands/route.md"
+    "./skills/roles/cfo",
+    "./skills/roles/cmo"
   ]
 }

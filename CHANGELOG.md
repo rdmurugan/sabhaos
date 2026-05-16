@@ -4,6 +4,36 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [1.7.0] — 2026-05-14
+
+Bundle MemPalace alongside Sabha OS in the same marketplace.
+
+### Added
+- **`mempalace` as a second plugin in `sabha-marketplace`** — sourced from `MemPalace/mempalace` on GitHub. Adding our marketplace now exposes both plugins: `sabha-os` (the protocol) and `mempalace` (the recommended memory substrate). Users get a single `claude plugin marketplace add rdmurugan/sabhaos` and then install whichever combination they want.
+
+### Install flow (new)
+```bash
+claude plugin marketplace add rdmurugan/sabhaos
+claude plugin install sabha-os@sabha-marketplace
+claude plugin install mempalace@sabha-marketplace   # optional but recommended
+uv tool install mempalace                            # the actual Python binary
+# OR:    pip install mempalace
+```
+
+The first three steps are pure Claude Code operations. Step 4 (`uv tool install mempalace`) is the unavoidable Python install — Claude Code plugins register MCP server configs but can't install the binary itself. The MemPalace plugin's `mcpServers` entry tells Claude Code to launch `mempalace-mcp`, which step 4 provides.
+
+### Positioning note
+Sabha remains **memory-MCP-agnostic** at the protocol layer — CLAUDE.md still treats memory generically. The marketplace is the *opinionated bundle*; the protocol is *un-opinionated*. Users who prefer mem0, Letta, Zep, or Pieces wire those directly and skip the MemPalace plugin install. See `docs/CUSTOMIZATION.md`.
+
+### Updated
+- `README.md` install section — replaced the single-plugin install path with the four-step bundled flow.
+- `docs/QUICKSTART.md` "Add memory" section — now mirrors the marketplace flow; honest about the Claude.ai web-app limitation (memory MCPs require a local runtime).
+
+### Why this matters
+- Reduces friction from "add a marketplace + look up another marketplace + install + pip install" to "add one marketplace + two installs + one pip install."
+- Establishes the marketplace as a *curated bundle*, not a single-plugin catalog. Future plugins (sabha-stripe-bridge, sabha-cmo-ga, etc.) can join here. Sets up the v2.0 architecture.
+- MemPalace stays maintained upstream by its own team. We point at their GitHub repo as the source; their releases flow to our users.
+
 ## [1.6.0] — 2026-05-14
 
 Marketplace ready — Sabha OS is now a one-line install.

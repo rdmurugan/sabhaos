@@ -49,17 +49,30 @@ The example wire-up in this repo uses [**MemPalace**](https://github.com/MemPala
 
 ## Install
 
-### Option A — Claude Code marketplace (recommended, two commands)
+### Option A — Claude Code marketplace (recommended)
+
+The `sabha-marketplace` ships **two plugins together**: `sabha-os` (the protocol) and `mempalace` (the memory substrate — your Sakthi). Install both, then the Python package for the MemPalace binary:
 
 ```bash
-# Inside Claude Code (or via the claude CLI):
+# 1. Add the marketplace once
 claude plugin marketplace add rdmurugan/sabhaos
+
+# 2. Install the protocol
 claude plugin install sabha-os@sabha-marketplace
+
+# 3. Install the memory plugin (optional but recommended)
+claude plugin install mempalace@sabha-marketplace
+
+# 4. Install the MemPalace binary so the MCP server can launch
+uv tool install mempalace
+# OR:    pip install mempalace
 ```
 
 Then personalize — open `~/.claude/plugins/cache/sabha-marketplace/sabha-os/CLAUDE.md` and fill in the `[BRACKETS]` with your entities, people, and projects.
 
-Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply.
+Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply. With MemPalace running, the council's recommendations draw on your accumulated Sakthi.
+
+**Don't want the memory layer?** Skip steps 3 and 4. Sabha works as a routing protocol without memory; you just won't get cross-session compounding. (Sabha is memory-MCP-agnostic — you can also wire mem0, Letta, Zep, or any other compatible MCP. See [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).)
 
 ### Option B — Direct git clone (if you prefer)
 

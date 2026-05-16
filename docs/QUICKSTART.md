@@ -219,11 +219,24 @@ The no-install path covers ~70% of Sabha's value. If you find yourself using it 
 
 ### Add memory (the "Sakthi" that compounds)
 
-In a single conversation, Claude remembers what you told it. Across conversations, it forgets. To make memory accumulate over time, you'd install a **memory MCP** — a separate piece of software that runs on your computer and stores your decisions, people, and projects locally.
+In a single conversation, Claude remembers what you told it. Across conversations, it forgets. To make memory accumulate over time, you install **MemPalace** — a local memory MCP that ships in the same marketplace as Sabha.
 
-The recommended one is **MemPalace** (open-source, MIT, runs locally — nothing leaves your machine). See its [GitHub repo](https://github.com/MemPalace/mempalace) for setup instructions.
+If you're already using Claude Code, three terminal commands:
 
-This is a technical setup — you'd need to be comfortable with installing software from GitHub and editing config files. If that's not you yet, skip it. Sabha still works without memory; you just have to re-introduce context each new conversation.
+```bash
+claude plugin marketplace add rdmurugan/sabhaos     # if not already added
+claude plugin install mempalace@sabha-marketplace
+uv tool install mempalace
+# (alternative if you don't have uv: pip install mempalace)
+```
+
+The first two register the plugin and its MCP server config. The third installs the actual Python binary that runs the memory server.
+
+After that, restart Claude Code. Sabha will detect MemPalace and start grounding answers in your accumulated Sakthi. Every decision and conversation can be filed into a searchable graph that lives entirely on your machine — nothing leaves.
+
+**If you're not using Claude Code** (just Claude.ai web), you can't run MemPalace today — memory MCPs require a local runtime. Sabha still works in Claude.ai's web Project as described in earlier steps; you just don't get the cross-session compounding. Most non-technical users skip this step.
+
+**Don't want MemPalace specifically?** Sabha is memory-MCP-agnostic. mem0, Letta, Zep, and Pieces all work with the same protocol. See [`docs/CUSTOMIZATION.md`](./CUSTOMIZATION.md) for swap instructions.
 
 ### Use Claude Code instead of Claude.ai
 

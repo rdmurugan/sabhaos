@@ -40,6 +40,33 @@
         "local-first",
         "indian-knowledge-systems"
       ]
+    },
+    {
+      "name": "mempalace",
+      "source": {
+        "source": "github",
+        "repo": "MemPalace/mempalace"
+      },
+      "description": "Local-first AI memory MCP — the recommended Sakthi substrate for Sabha OS. Mines projects and conversations into a searchable graph-shaped palace. 19 MCP tools, ChromaDB-backed knowledge graph, auto-save hooks, guided setup. MIT. Maintained upstream at github.com/MemPalace/mempalace.",
+      "homepage": "https://github.com/MemPalace/mempalace",
+      "repository": "https://github.com/MemPalace/mempalace",
+      "license": "MIT",
+      "category": "memory",
+      "keywords": [
+        "memory",
+        "mcp",
+        "rag",
+        "chromadb",
+        "palace",
+        "local-first",
+        "sakthi",
+        "sabha"
+      ],
+      "tags": [
+        "memory",
+        "mcp-server",
+        "local-first"
+      ]
     }
   ]
 }

@@ -60,26 +60,32 @@ Before asserting facts about the user's known entities (people, companies,
 products, projects), **check memory first**. Never invent facts about a named
 entity.
 
-### MemPalace wire-up (example)
+### Sakthi Graph wire-up (recommended)
 
-Any memory MCP works. As a concrete example, here's the wire-up for
-[MemPalace](https://github.com/MemPalace/mempalace) (MIT, open-source, graph-shaped, runs locally).
-If it's connected (tool names prefixed `mcp__mempalace__*`), use it like this:
+The memory layer of Sabha is **Sakthi Graph** — a local-first, graph-shaped
+knowledge graph forked from MemPalace and pre-shaped for the Sabha council.
+Tools are prefixed `mcp__sakthi__*`. Install once with
+`uv tool install sakthi-graph` then `sakthi init --sabha ~/sakthi` to bootstrap
+the 9 role wings. See [github.com/rdmurugan/sakthi-graph](https://github.com/rdmurugan/sakthi-graph).
 
-- `mempalace_search` — semantic search across wings/rooms. Pass a 3–7 word
-  query and, when known, `wing` (e.g. `"work"` or `"personal"`) and
-  `room` (e.g. `"cfo"`, `"projects"`).
-- `mempalace_kg_query` — entity lookup in the knowledge graph. Use for any
+If Sakthi is connected, use it like this:
+
+- `sakthi_search` — semantic search across wings/rooms. Pass a 3–7 word
+  query and, when known, `wing` (e.g. `"cfo"`, `"cmo"`, `"personal"`) and
+  `room` (e.g. `"decisions"`, `"projects"`).
+- `sakthi_kg_query` — entity lookup in the knowledge graph. Use for any
   named person, company, product, or project the user mentions.
-- `mempalace_diary_write` — at the end of an *engage* session, write a one-
+- `sakthi_diary_write` — at the end of an *engage* session, write a one-
   paragraph diary entry under the lead role's `agent_name`. This is how
   Sakthi compounds.
 
 Rule: when the question names a known entity (see the list below), **query
 first, answer second**.
 
-To swap in a different memory layer (mem0, Letta, Zep, Pieces, or a local
-`memory/` folder of markdown), see [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).
+**Alternative memory layers** — Sabha remains memory-MCP-agnostic at the
+protocol layer. mem0, Letta, Zep, Pieces, plain MemPalace, or a local
+`memory/` folder all work; only the tool names change. See
+[`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).
 
 ### Data MCPs — for real-time grounding (1.5+)
 

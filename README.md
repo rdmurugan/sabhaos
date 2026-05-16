@@ -45,13 +45,13 @@ Eight built-in roles, fully customizable. Two modes — **ask** (chat reply) and
 
 Cloud AI products forget you the moment a session ends — or worse, they remember you on *their* servers. Sabha is built around a different assumption: **your Sakthi belongs in your house.**
 
-The example wire-up in this repo uses [**MemPalace**](https://github.com/MemPalace/mempalace) — an open-source (MIT), graph-shaped, locally-running memory MCP. Any memory MCP that exposes search and write tools works the same way (mem0, Letta, Zep, Pieces, or a plain `memory/` folder of markdown). Pick whichever you'll actually run. The point is: **the memory lives where you live.**
+The example wire-up in this repo uses [**Sakthi Graph**](https://github.com/rdmurugan/sakthi-graph) — an open-source (MIT), graph-shaped, locally-running memory MCP. Any memory MCP that exposes search and write tools works the same way (mem0, Letta, Zep, Pieces, or a plain `memory/` folder of markdown). Pick whichever you'll actually run. The point is: **the memory lives where you live.**
 
 ## Install
 
 ### Option A — Claude Code marketplace (recommended)
 
-The `sabha-marketplace` ships **two plugins together**: `sabha-os` (the protocol) and `mempalace` (the memory substrate — your Sakthi). Install both, then the Python package for the MemPalace binary:
+The `sabha-marketplace` ships **two plugins together**: `sabha-os` (the protocol) and `sakthi-graph` (the memory layer — your Sakthi). Install both, then the Python package for the Sakthi binary:
 
 ```bash
 # 1. Add the marketplace once
@@ -61,16 +61,19 @@ claude plugin marketplace add rdmurugan/sabhaos
 claude plugin install sabha-os@sabha-marketplace
 
 # 3. Install the memory plugin (optional but recommended)
-claude plugin install mempalace@sabha-marketplace
+claude plugin install sakthi-graph@sabha-marketplace
 
-# 4. Install the MemPalace binary so the MCP server can launch
-uv tool install mempalace
-# OR:    pip install mempalace
+# 4. Install the Sakthi binary so the MCP server can launch
+uv tool install sakthi-graph
+# OR:    pip install sakthi-graph
+
+# 5. Bootstrap the Sabha-shaped palace (9 role wings: cfo, cmo, cio, ..., ceo)
+sakthi init --sabha ~/sakthi
 ```
 
 Then personalize — open `~/.claude/plugins/cache/sabha-marketplace/sabha-os/CLAUDE.md` and fill in the `[BRACKETS]` with your entities, people, and projects.
 
-Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply. With MemPalace running, the council's recommendations draw on your accumulated Sakthi.
+Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply. With Sakthi running, the council's recommendations draw on your accumulated Sakthi knowledge-graph.
 
 **Don't want the memory layer?** Skip steps 3 and 4. Sabha works as a routing protocol without memory; you just won't get cross-session compounding. (Sabha is memory-MCP-agnostic — you can also wire mem0, Letta, Zep, or any other compatible MCP. See [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).)
 
@@ -227,4 +230,4 @@ An open-source project conceived by [Durai (@rdmurugan)](https://github.com/rdmu
 
 ## Acknowledgments
 
-Sabha OS is memory-MCP-agnostic — any layer that exposes search and write tools works. The examples in [`CLAUDE.md`](./CLAUDE.md) and [`skills/sabha-router/SKILL.md`](./skills/sabha-router/SKILL.md) use [MemPalace](https://github.com/MemPalace/mempalace) (MIT) to show concrete tool calls, but the same pattern applies to mem0, Letta, Zep, Pieces, or a plain `memory/` folder. Thanks to the open-source memory-MCP projects that make a locally-owned Sakthi possible.
+Sabha OS is memory-MCP-agnostic — any layer that exposes search and write tools works. The examples in [`CLAUDE.md`](./CLAUDE.md) and [`skills/sabha-router/SKILL.md`](./skills/sabha-router/SKILL.md) use [Sakthi Graph](https://github.com/rdmurugan/sakthi-graph) (MIT) to show concrete tool calls, but the same pattern applies to mem0, Letta, Zep, Pieces, or a plain `memory/` folder. Thanks to the open-source memory-MCP projects that make a locally-owned Sakthi possible.

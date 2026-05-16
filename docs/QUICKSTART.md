@@ -219,20 +219,21 @@ The no-install path covers ~70% of Sabha's value. If you find yourself using it 
 
 ### Add memory (the "Sakthi" that compounds)
 
-In a single conversation, Claude remembers what you told it. Across conversations, it forgets. To make memory accumulate over time, you install **MemPalace** — a local memory MCP that ships in the same marketplace as Sabha.
+In a single conversation, Claude remembers what you told it. Across conversations, it forgets. To make memory accumulate over time, you install **Sakthi Graph** — a local memory MCP that ships in the same marketplace as Sabha. Sakthi is a fork of MemPalace, pre-shaped for the Sabha council (the 9 role wings are bootstrapped automatically).
 
-If you're already using Claude Code, three terminal commands:
+If you're already using Claude Code, four terminal commands:
 
 ```bash
 claude plugin marketplace add rdmurugan/sabhaos     # if not already added
-claude plugin install mempalace@sabha-marketplace
-uv tool install mempalace
-# (alternative if you don't have uv: pip install mempalace)
+claude plugin install sakthi-graph@sabha-marketplace
+uv tool install sakthi-graph
+# (alternative if you don't have uv: pip install sakthi-graph)
+sakthi init --sabha ~/sakthi                         # bootstraps 9 role wings
 ```
 
-The first two register the plugin and its MCP server config. The third installs the actual Python binary that runs the memory server.
+The first two register the plugin and its MCP server config. The third installs the actual Python binary that runs the memory server. The fourth bootstraps the Sabha-shaped palace.
 
-After that, restart Claude Code. Sabha will detect MemPalace and start grounding answers in your accumulated Sakthi. Every decision and conversation can be filed into a searchable graph that lives entirely on your machine — nothing leaves.
+After that, restart Claude Code. Sabha will detect Sakthi and start grounding answers in your accumulated knowledge-graph. Every decision and conversation can be filed into a searchable graph that lives entirely on your machine — nothing leaves.
 
 **If you're not using Claude Code** (just Claude.ai web), you can't run MemPalace today — memory MCPs require a local runtime. Sabha still works in Claude.ai's web Project as described in earlier steps; you just don't get the cross-session compounding. Most non-technical users skip this step.
 

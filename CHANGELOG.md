@@ -4,6 +4,44 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [2.1.0] — 2026-05-16
+
+Memory layer rebranded as **Sakthi Graph** — a fork of MemPalace pre-shaped for the Sabha council. The trinity is now coherent and product-grade: **Sabha (the council) + Chanakya (the archetype) + Sakthi (your power, your memory, your machine).**
+
+### Added — Sakthi Graph (new repo: rdmurugan/sakthi-graph)
+- Forked from `MemPalace/mempalace` v3.3.5 (MIT). Original LICENSE preserved; NOTICE file documents attribution. Internal Python module structure unchanged from upstream to minimize merge friction.
+- **Surface rebrand:** package `sakthi-graph` (was `mempalace`); CLI commands `sakthi` and `sakthi-mcp` (legacy aliases retained); all 31 MCP tool names renamed `sakthi_*` (e.g., `sakthi_search`, `sakthi_kg_query`, `sakthi_diary_write`).
+- **Sabha-specific preset** (`mempalace/sabha.py`): the new `sakthi init --sabha` flag bootstraps 9 role wings pre-configured for the Sabha council (cfo, cmo, cio, caio, cso, cxo, chro, clc, ceo), each with rooms tuned for that role's decision domain. Optional `--personal` adds 6 life wings (health, finance-personal, family, career, time, self).
+- **Role-aware diary templates** — one per Sabha role, with fields appropriate to that role's diary discipline (e.g., CFO template prompts for numbers used + framework + tradeoff; CLC template enforces risk-tier + counsel hand-off; CEO template captures irreducible-question + regret-check).
+- **License:** MIT preserved. Sabha-specific additions copyright Durai (@rdmurugan), released under the same MIT.
+
+### Updated in Sabha OS
+- **CLAUDE.md MEMORY section** — renamed "MemPalace wire-up (example)" → "Sakthi Graph wire-up (recommended)". Tool names updated `mempalace_*` → `sakthi_*`. Sabha remains memory-MCP-agnostic at the protocol layer (mem0, Letta, Zep, plain MemPalace still work; only Sakthi gets the Sabha-shaped preset).
+- **Marketplace manifest** — `mempalace` plugin replaced with `sakthi-graph` plugin, sourced from `github.com/rdmurugan/sakthi-graph`. New install path:
+  ```
+  claude plugin marketplace add rdmurugan/sabhaos
+  claude plugin install sabha-os@sabha-marketplace
+  claude plugin install sakthi-graph@sabha-marketplace
+  uv tool install sakthi-graph
+  sakthi init --sabha ~/sakthi
+  ```
+- **Plugin description** — now names the Sabha trinity explicitly (Sabha + Chanakya + Sakthi); cross-links to Sakthi.
+- **PRIVACY.md** — updated to reference Sakthi-graph (no data-collection posture identical to MemPalace upstream).
+- **README install section** — five-step flow including the `sakthi init --sabha` bootstrap.
+- **QUICKSTART.md** — memory section rewritten around Sakthi.
+- **All docs** — `mcp__mempalace__*` tool references updated to `mcp__sakthi__*`; URLs updated to point to the Sakthi repo; CFO/CMO data-hooks docs updated.
+
+### Strategic positioning
+This release converts the marketplace listing from "Sabha OS + a generic memory MCP" into a coherent product family with branded surface area. The fork is fully transparent: upstream is preserved, attribution is explicit, internal architecture is unchanged, and any user can pull from `MemPalace/mempalace` directly if they prefer pure upstream.
+
+### License compliance (CLC review)
+MIT permits forking with attribution. Sakthi:
+- Preserves the original LICENSE file from MemPalace
+- Adds NOTICE crediting MemPalace authors (milla-jovovich)
+- README's first paragraph names the upstream relationship
+- pyproject.toml `[project.urls]` includes "Upstream (MemPalace)" link
+- Internal copyright headers in mempalace/ module are preserved
+
 ## [2.0.0] — 2026-05-16
 
 Complete C-suite deep-skill coverage. The professional council now has framework grounding across **all 9 roles**. Submission-ready for the official Anthropic plugin marketplace.

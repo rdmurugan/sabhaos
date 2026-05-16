@@ -28,16 +28,16 @@ When you ask Claude a substantive question while Sabha OS is active:
 
 **No data is sent to any Sabha OS author, server, or third party introduced by this plugin.** All data flow goes through Anthropic's API (standard) and your locally-installed memory MCP (your choice).
 
-## What about the optional MemPalace plugin in the same marketplace?
+## What about the optional Sakthi Graph plugin in the same marketplace?
 
-The Sabha marketplace also lists `mempalace`, a local-first memory MCP. If you install MemPalace, it:
+The Sabha marketplace also lists `sakthi-graph`, a local-first memory MCP forked from MemPalace and pre-shaped for the Sabha council. If you install Sakthi, it:
 
-- Runs on your machine (Python package installed via `uv tool install mempalace` or equivalent)
-- Stores your memory locally (ChromaDB by default, in a directory you control)
+- Runs on your machine (Python package installed via `uv tool install sakthi-graph` or equivalent)
+- Stores your memory locally (ChromaDB by default, in a directory you control — e.g., `~/sakthi`)
 - Communicates with Claude Code over the MCP protocol — locally
 - Does not transmit your memory data anywhere
 
-For MemPalace's own privacy disclosures, see its repo: [https://github.com/MemPalace/mempalace](https://github.com/MemPalace/mempalace).
+For Sakthi's own privacy practice (and upstream MemPalace attribution), see: [https://github.com/rdmurugan/sakthi-graph](https://github.com/rdmurugan/sakthi-graph).
 
 ## What you should know about Claude itself
 

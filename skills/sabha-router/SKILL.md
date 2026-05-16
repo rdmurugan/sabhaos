@@ -46,10 +46,10 @@ Routing: <ROLE>.
 
 Sabha is **local-first**. The user's accumulated knowledge — their **Sakthi** — lives in a memory MCP on their machine. Before asserting facts about their known entities (people, companies, products, projects), query memory.
 
-Concrete example — **MemPalace** (open-source, MIT, runs locally; tools prefixed `mcp__mempalace__*`):
-- `mempalace_search` for topical lookups (wing/room scoped).
-- `mempalace_kg_query` for any named entity.
-- `mempalace_diary_write` at the end of an *engage* session — this is how Sakthi compounds.
+Concrete example — **MemPalace** (open-source, MIT, runs locally; tools prefixed `mcp__sakthi__*`):
+- `sakthi_search` for topical lookups (wing/room scoped).
+- `sakthi_kg_query` for any named entity.
+- `sakthi_diary_write` at the end of an *engage* session — this is how Sakthi compounds.
 
 Any other memory MCP works the same way — call the search-equivalent tool first, then answer. If no memory is available in this surface, mention it **once per session**:
 

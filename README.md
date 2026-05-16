@@ -49,22 +49,28 @@ The example wire-up in this repo uses [**MemPalace**](https://github.com/MemPala
 
 ## Install
 
-### Option A — Claude Code plugin (recommended)
+### Option A — Claude Code marketplace (recommended, two commands)
 
 ```bash
-# 1. Clone into your Claude plugins directory
-git clone https://github.com/rdmurugan/sabhaos.git ~/.claude/plugins/sabha-os
-
-# 2. Enable it
-claude plugin enable sabha-os
-
-# 3. Personalize — open ~/.claude/plugins/sabha-os/CLAUDE.md
-#    and fill in the [BRACKETS] with your entities, people, projects
+# Inside Claude Code (or via the claude CLI):
+claude plugin marketplace add rdmurugan/sabhaos
+claude plugin install sabha-os@sabha-marketplace
 ```
 
-That's it. Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply.
+Then personalize — open `~/.claude/plugins/cache/sabha-marketplace/sabha-os/CLAUDE.md` and fill in the `[BRACKETS]` with your entities, people, and projects.
 
-### Option B — Plain Claude (Claude.ai, Cowork, API)
+Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply.
+
+### Option B — Direct git clone (if you prefer)
+
+```bash
+git clone https://github.com/rdmurugan/sabhaos.git ~/.claude/plugins/sabha-os
+claude plugin enable sabha-os
+```
+
+Same result; just bypasses the marketplace layer.
+
+### Option C — Plain Claude (Claude.ai, Cowork, API)
 
 If you don't use Claude Code, copy the contents of [`CLAUDE.md`](./CLAUDE.md) into:
 
@@ -72,7 +78,7 @@ If you don't use Claude Code, copy the contents of [`CLAUDE.md`](./CLAUDE.md) in
 - **Cowork** — paste into a global `CLAUDE.md` in your workspace
 - **API** — prepend it as a system prompt
 
-Fill in the `[BRACKETS]` with your own entities before pasting.
+Fill in the `[BRACKETS]` with your own entities before pasting. For a step-by-step walkthrough, see [`docs/QUICKSTART.md`](./docs/QUICKSTART.md).
 
 ## Three reference councils
 

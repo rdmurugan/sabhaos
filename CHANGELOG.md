@@ -4,10 +4,32 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
-## [Unreleased]
+## [1.6.0] — 2026-05-14
+
+Marketplace ready — Sabha OS is now a one-line install.
 
 ### Added
-- [`evals/ANALYSIS.md`](evals/ANALYSIS.md) — interpretation of the v1.3.1 eval run. Per-axis breakdown, deep-skill vs no-deep-skill split, per-role analysis, the three baseline-wins as v1.6 roadmap signal, methodology caveats, and three lengths of launch-defensible claims. Every number is cited to `evals/results/2026-05-14.json`. Linked from README "Does it actually work?" and from `evals/README.md`.
+- **`.claude-plugin/marketplace.json`** — Sabha OS publishes itself as the single plugin in the `sabha-marketplace`. Anyone can now install with:
+  ```
+  claude plugin marketplace add rdmurugan/sabhaos
+  claude plugin install sabha-os@sabha-marketplace
+  ```
+  Built against the canonical schema documented at https://code.claude.com/docs/en/plugin-marketplaces. Name `sabha-marketplace` is kebab-case and outside Anthropic's reserved-name list.
+
+- **Deep CFO and CMO skills registered in `plugin.json`.** Previously only `sabha-router` was listed in the manifest's `skills` array; the deep `skills/roles/cfo/` and `skills/roles/cmo/` directories existed but weren't surfaced to Claude Code's skill router. Marketplace installers now get the full depth layer.
+
+- **[`evals/ANALYSIS.md`](evals/ANALYSIS.md)** (carried over from Unreleased) — interpretation of the v1.3.1 eval run.
+
+### Changed
+- README install section now leads with the marketplace install (Option A), with `git clone` as Option B and Claude.ai paste as Option C. The marketplace install is two commands; the previous git-clone path required four.
+
+### Why this matters
+- Discoverability. Anyone who reads the LinkedIn post and lands on the repo now has a one-line install path. Compare: `claude plugin marketplace add rdmurugan/sabhaos` (one shareable command) vs. `git clone … && claude plugin enable … && open … && edit BRACKETS`.
+- Per-user reach. Once the marketplace is added to a user's Claude Code, any future plugin we publish here is auto-discoverable to them.
+- It also unlocks teams via `.claude/settings.json` → `extraKnownMarketplaces`, which pre-prompts colleagues to add the marketplace when they trust the project folder.
+
+### Validation
+Run `claude plugin validate .` from the repo root to confirm the marketplace passes Claude Code's schema check before announcing. (I can't execute `claude` commands from this session.)
 
 ## [1.5.0] — 2026-05-14
 

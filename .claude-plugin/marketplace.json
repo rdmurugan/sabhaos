@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "sabha-marketplace",
+  "description": "Sabha OS \u2014 a local-first AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded.",
+  "owner": {
+    "name": "Durai (@rdmurugan)",
+    "email": "rdmurugannew@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "sabha-os",
+      "source": "./",
+      "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO) and answered in the Chanakya tradition \u2014 terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project. Deep skills shipped for CFO and CMO (frameworks from Kahneman, Christensen, Porter, McKinsey, Skok, and others). Live-data hooks documented for Stripe, QuickBooks, and Google Analytics.",
+      "author": {
+        "name": "Durai (@rdmurugan)"
+      },
+      "homepage": "https://github.com/rdmurugan/sabhaos",
+      "repository": "https://github.com/rdmurugan/sabhaos",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "council",
+        "chanakya",
+        "sakthi",
+        "advisor",
+        "decision-support",
+        "local-first",
+        "memory",
+        "protocol",
+        "executive",
+        "operator",
+        "cfo",
+        "cmo",
+        "framework"
+      ],
+      "tags": [
+        "decision-support",
+        "operator-tools",
+        "local-first",
+        "indian-knowledge-systems"
+      ]
+    }
+  ]
+}

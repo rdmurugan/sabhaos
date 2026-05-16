@@ -1,7 +1,7 @@
 {
   "name": "sabha-os",
   "displayName": "Sabha OS",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role and answered in the Chanakya tradition — terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project.",
   "author": {
     "name": "Sabha OS contributors",
@@ -27,7 +27,9 @@
     "sabha"
   ],
   "skills": [
-    "skills/sabha-router"
+    "skills/sabha-router",
+    "skills/roles/cfo",
+    "skills/roles/cmo"
   ],
   "commands": [
     "commands/ask.md",

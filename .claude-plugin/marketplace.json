@@ -1,7 +1,8 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "sabha-marketplace",
-  "description": "Sabha OS \u2014 a local-first AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded.",
+  "metadata": {
+    "description": "Sabha OS \u2014 a local-first AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded."
+  },
   "owner": {
     "name": "Durai (@rdmurugan)",
     "email": "rdmurugannew@gmail.com"

@@ -44,8 +44,8 @@
     {
       "name": "mempalace",
       "source": {
-        "source": "github",
-        "repo": "MemPalace/mempalace"
+        "source": "url",
+        "url": "https://github.com/MemPalace/mempalace.git"
       },
       "description": "Local-first AI memory MCP — the recommended Sakthi substrate for Sabha OS. Mines projects and conversations into a searchable graph-shaped palace. 19 MCP tools, ChromaDB-backed knowledge graph, auto-save hooks, guided setup. MIT. Maintained upstream at github.com/MemPalace/mempalace.",
       "homepage": "https://github.com/MemPalace/mempalace",

@@ -4,6 +4,11 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [Unreleased]
+
+### Added
+- [`evals/ANALYSIS.md`](evals/ANALYSIS.md) — interpretation of the v1.3.1 eval run. Per-axis breakdown, deep-skill vs no-deep-skill split, per-role analysis, the three baseline-wins as v1.6 roadmap signal, methodology caveats, and three lengths of launch-defensible claims. Every number is cited to `evals/results/2026-05-14.json`. Linked from README "Does it actually work?" and from `evals/README.md`.
+
 ## [1.5.0] — 2026-05-14
 
 Live-data grounding scaffold — data hooks for CFO and CMO.

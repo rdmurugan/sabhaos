@@ -29,7 +29,7 @@ Then a **pairwise preference** judge sees both replies (in randomized order) and
 - `decisiveness`, `tradeoff_named`, `concreteness`, `length_discipline`: meaningful lift under Sabha — typically +1.0 to +2.0 per axis on a 0-5 scale.
 - `pairwise`: Sabha wins ≥ 70% of paired comparisons. Below that and the protocol isn't earning its keep.
 
-The actual numbers live in [`results/latest.md`](./results/latest.md) once the eval has been run.
+The actual numbers live in [`results/latest.md`](./results/latest.md). The interpretation of the most-recent run — what's signal, what's noise, what to fix next — is in [`ANALYSIS.md`](./ANALYSIS.md).
 
 ## Running the eval
 

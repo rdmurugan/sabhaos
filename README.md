@@ -137,7 +137,7 @@ export ANTHROPIC_API_KEY=sk-ant-...
 python evals/run_eval.py
 ```
 
-Results are committed to [`evals/results/`](./evals/results/). If the numbers don't move, the protocol isn't earning its keep — that data lives in the repo, not in marketing copy.
+Results are committed to [`evals/results/`](./evals/results/). The interpretation — what the numbers mean, where the protocol fails, what's roadmapped — is in [`evals/ANALYSIS.md`](./evals/ANALYSIS.md). If the numbers don't move, the protocol isn't earning its keep — that data lives in the repo, not in marketing copy.
 
 ## What's in this repo
 

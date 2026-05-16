@@ -128,11 +128,19 @@ Most AI replies are *option-shaped*: *"here are three approaches, with pros and 
 
 ## Depth — each role is a skill, not a voice tweak
 
-Three roles are now built out as **deep skills** (more coming):
+**All 9 C-suite roles are now built out as deep skills.** Each ships with a SKILL definition, a multi-framework REFERENCE knowledge base, heuristics for fast-lookup, fillable templates, procedural playbooks, end-to-end worked examples, and source references.
 
-- [`skills/roles/cfo/`](./skills/roles/cfo/) — runway models, unit economics, capital allocation, pricing canvas, fundraise prep, cost-cut playbooks. Draws on Kahneman/Tversky on heuristics, McKinsey on capital allocation, Skok on SaaS unit economics, the Wack lineage on scenario planning, and Kaplan & Norton on performance measurement. See [`skills/roles/cfo/REFERENCE.md`](./skills/roles/cfo/REFERENCE.md).
-- [`skills/roles/cmo/`](./skills/roles/cmo/) — positioning, Jobs-to-be-Done, channel portfolio, repositioning, behavioral pricing. Draws on Christensen on JTBD, Porter on Five Forces, Trout & Ries on positioning, Thaler & Sunstein on choice architecture, Aaker on brand equity, McClure on pirate metrics. See [`skills/roles/cmo/REFERENCE.md`](./skills/roles/cmo/REFERENCE.md).
-- [`skills/roles/clc/`](./skills/roles/clc/) — Chief Legal Counsel framing: contracts (MSA/NDA/SOW), IP (trademark, copyright, patent, trade secret, IP assignment), privacy (GDPR/CCPA/EU AI Act), corporate (entity, board, securities), employment-legal, regulatory, litigation framing. Risk-tier triage (red/yellow/green) on every reply, with explicit hand-off to licensed counsel where required. Draws on Restatement of Contracts, Fisher & Ury on negotiation, USPTO/Lanham Act for IP, GDPR/CCPA/EU AI Act for privacy, Delaware GCL for corporate, FAA + AAA for dispute resolution. See [`skills/roles/clc/REFERENCE.md`](./skills/roles/clc/REFERENCE.md). **Note:** this skill provides operator-grade legal framing, NOT legal advice.
+- [`skills/roles/cfo/`](./skills/roles/cfo/) — runway, unit economics, capital allocation, pricing canvas, fundraise prep, cost-cut. Draws on Kahneman/Tversky, McKinsey on capital allocation, Skok on SaaS unit economics, Wack on scenario planning, Kaplan & Norton on performance.
+- [`skills/roles/cmo/`](./skills/roles/cmo/) — positioning, Jobs-to-be-Done, channel portfolio, repositioning, behavioral pricing. Draws on Christensen, Porter, Trout & Ries, Thaler & Sunstein, Aaker, McClure.
+- [`skills/roles/cio/`](./skills/roles/cio/) — infrastructure, vendor selection, security posture, cost optimization, incident response, observability, platform engineering. Draws on AWS Well-Architected, Google SRE, DORA / Accelerate, FinOps Foundation, NIST.
+- [`skills/roles/caio/`](./skills/roles/caio/) — AI strategy, model selection economics, RAG architecture, prompt design, eval discipline, agents, AI governance (EU AI Act, NIST AI RMF). Draws on Anthropic / OpenAI / Google docs, Christensen on JTBD applied to AI, and the operator AI canon.
+- [`skills/roles/cso/`](./skills/roles/cso/) — where-to-play / how-to-win, wedge identification, competitive response, partnership evaluation, market entry, big-bet framework. Draws on Porter, Lafley & Martin, Rumelt, Wack on scenarios, Klein on pre-mortems.
+- [`skills/roles/cxo/`](./skills/roles/cxo/) — UX, activation, cohort retention, the four kinds of churn, NPS done right, customer success economics, funnel diagnostic. Draws on McClure (pirate metrics), Reichheld (NPS), Eyal (Hooked), Skok (SaaS metrics), Fitzpatrick (customer interviewing).
+- [`skills/roles/chro/`](./skills/roles/chro/) — hiring, classification (ABC test, IR35), compensation bands, performance management, offer letters, severance, layoff playbook. Jurisdiction-aware; cross-routes to CLC for legal exposure.
+- [`skills/roles/clc/`](./skills/roles/clc/) — Chief Legal Counsel framing (NOT legal advice). Contracts (MSA, NDA, SOW), IP (trademark, copyright, patent, trade secret, IP assignment), privacy (GDPR, CCPA, EU AI Act), corporate, securities, employment-legal, regulatory, litigation framing. Risk-tier triage (red/yellow/green) on every reply, explicit hand-off to licensed counsel where required.
+- [`skills/roles/ceo/`](./skills/roles/ceo/) — synthesis when functional roles disagree, irreducible-question framing, founder-mode patterns, decision-memo template. Intentionally lighter than functional roles — the CEO integrates rather than competes with depth.
+
+**The CLC skill provides operator-grade legal framing, not legal advice.** Practicing law is licensed and jurisdiction-specific.
 
 Each deep skill ships with:
 

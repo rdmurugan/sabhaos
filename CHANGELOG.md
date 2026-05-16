@@ -4,6 +4,47 @@ All notable changes to Sabha OS will be documented here. Format follows [Keep a 
 
 > **Origin:** project conceived October 2025. First public release May 2026.
 
+## [2.0.0] — 2026-05-16
+
+Complete C-suite deep-skill coverage. The professional council now has framework grounding across **all 9 roles**. Submission-ready for the official Anthropic plugin marketplace.
+
+### Added — six new deep skills
+- **`skills/roles/cio/`** — infrastructure, vendor selection, security posture (NIST tiers), cost optimization (FinOps), incident response (5-stage playbook), observability, platform engineering. Templates: vendor scorecard, security posture review, cost audit. Playbook: vendor evaluation, incident response. Worked example: cloud bill spike investigation.
+- **`skills/roles/caio/`** — AI strategy, model selection economics (capability ÷ cost ÷ latency), RAG architecture (5-component design), prompt design patterns, eval discipline, agents (when to / when not to), AI governance (EU AI Act tiers), cost-of-inference math. Templates: model-selection scorecard, eval rubric, RAG design doc. Playbooks: build-an-eval, ship-rag-pilot. Worked example: classifier model selection with cost math.
+- **`skills/roles/chro/`** — hiring (cost-of-delay vs cost-of-capacity), employee classification (US common-law, CA AB5, UK IR35), compensation bands, performance management (PIP discipline), org design, payroll vendor selection, international hiring. Templates: offer letter checklist, comp band. Playbooks: first hire, performance management. Worked example: contractor misclassification risk.
+- **`skills/roles/cso/`** — where-to-play / how-to-win (Porter, Lafley & Martin), wedge identification, competitive response decision tree, partnership evaluation (4-question filter), market entry / exit, big-bet framework, scenario planning. Templates: where-to-play canvas, competitor map. Playbooks: market entry, partnership evaluation. Worked example: competitor-shipped-feature response.
+- **`skills/roles/cxo/`** — activation, cohort retention, four kinds of churn (bad-fit / failed-activation / value-drift / competitive), NPS done right, customer success economics, funnel diagnostic, customer interviewing. Templates: funnel diagnostic, customer interview guide. Playbooks: activation improvement, churn investigation. Worked example: Day-4 retention cliff.
+- **`skills/roles/ceo/`** — synthesis frameworks (irreducible-question frame, regret minimization, decisive action, pre-mortem, founder-mode patterns). Intentionally lighter than functional roles — the CEO integrates rather than competes with depth. Template: decision memo.
+
+### Strengthened — CLC legal disclaimer
+The CLC SKILL.md description now front-loads "NOT LEGAL ADVICE — operator-grade legal FRAMING only" for marketplace catalog visibility. Marketplace submission packaging makes the boundary unmistakable to any visitor.
+
+### Updated
+- **CLAUDE.md role table** — all 9 roles now flagged with "deep skill" markers. CEO promoted from "escape hatch" to synthesis role.
+- **Plugin manifest** — all 9 deep skills registered. Description rewritten to capture the full breadth of coverage with explicit CLC disclaimer.
+- **README "Depth" section** — rewritten to describe all 9 deep skills with framework attribution and the CLC caveat.
+
+### Why v2.0.0 (major bump)
+- Architectural shift: from "selective depth (CFO + CMO + CLC)" to "full coverage." This is a category change in what the product delivers.
+- The marketplace listing now reads as "complete professional council, framework-grounded" rather than "routing protocol with some depth."
+- Submission to claude.com/plugins is the immediate next step.
+
+### Scale of the change
+- **~25,000+ lines of new operator-grade content** across the six new deep skills.
+- Each role follows the established CFO/CMO/CLC pattern: SKILL + REFERENCE + heuristics + 2-3 templates + 1-2 playbooks + 1 worked example + references.
+- Framework citations across all roles trace back to canonical operator literature; specific URLs deliberately omitted in favor of stable attribution (see each role's `references.md`).
+
+### What's NOT in v2.0
+- Personal-sakthi role-level depth (Health / Finance / Family / Career / Time / Self). Deferred — different audience, dilutes the submission focus. Coming in a separate release stream.
+- Developer-sakthi role-level depth (Architect / Reviewer / Security / Performance / QA / Mentor). Deferred — would compete with Anthropic's official LSP plugins.
+- Live-data MCP grounding for the new roles (Stripe for CFO, GA for CMO are documented in v1.5). Per-role data hooks for CIO, CHRO, CSO, CXO, CAIO planned for v2.1+.
+- Eval coverage for the new roles. The eval harness (v1.3.1) runs on the protocol layer; specific eval coverage for each deep skill is v2.x roadmap.
+
+### Marketplace submission readiness
+Ready to submit at:
+- claude.ai/settings/plugins/submit
+- platform.claude.com/plugins/submit
+
 ## [1.8.0] — 2026-05-16
 
 Chief Legal Counsel (CLC) — new deep skill, third role with framework grounding.

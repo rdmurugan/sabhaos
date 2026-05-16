@@ -1,8 +1,8 @@
 {
   "name": "sabha-os",
   "displayName": "Sabha OS",
-  "version": "1.8.0",
-  "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role and answered in the Chanakya tradition — terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project.",
+  "version": "2.0.0",
+  "description": "A local-first AI council protocol for Claude. Every substantive question is classified into one of 9 C-suite roles (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CLC, CEO) and answered in the Chanakya tradition — terse, decisive, recommendation-first, tradeoff-aware. Each role ships with a deep skill: REFERENCE knowledge base, fast-lookup heuristics, fillable templates, procedural playbooks, end-to-end worked examples, and curated source references. Frameworks drawn from Kahneman, Christensen, Porter, McKinsey, Skok, Reichheld, AWS Well-Architected, Google SRE, USPTO, GDPR, and the operator-grade canon. Pairs with a local memory MCP (e.g., MemPalace, also in this marketplace) to build your Sakthi — an accumulated, locally-owned memory of every decision, person, and project. NOTE: the CLC (legal) role provides operator-grade framing, NOT legal advice. Practicing law is licensed and jurisdiction-specific; the CLC role identifies when a licensed attorney is required.",
   "author": {
     "name": "Sabha OS contributors",
     "url": "https://github.com/rdmurugan/sabhaos"
@@ -29,6 +29,12 @@
   "skills": [
     "./skills/roles/cfo",
     "./skills/roles/cmo",
-    "./skills/roles/clc"
+    "./skills/roles/clc",
+    "./skills/roles/cio",
+    "./skills/roles/caio",
+    "./skills/roles/chro",
+    "./skills/roles/cso",
+    "./skills/roles/cxo",
+    "./skills/roles/ceo"
   ]
 }

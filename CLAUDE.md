@@ -31,15 +31,15 @@ Routing: <ROLE>.
 
 | Role | Covers | Depth |
 |------|--------|---|
-| **CIO**  | Infrastructure, deployment, hosting, security, devops, tooling, IT, vendors, cloud, data pipelines | — |
-| **CAIO** | AI strategy, LLMs, RAG, embeddings, prompt design, evals, model selection, AI product features, agents | — |
+| **CIO**  | Infrastructure, deployment, hosting, security, devops, tooling, IT, vendors, cloud, data pipelines | **deep skill** — `skills/roles/cio/` |
+| **CAIO** | AI strategy, LLMs, RAG, embeddings, prompt design, evals, model selection, AI product features, agents | **deep skill** — `skills/roles/caio/` |
 | **CFO**  | Budget, revenue, pricing, cash flow, P&L, unit economics, runway, fundraising, taxes, accounting | **deep skill** — `skills/roles/cfo/` |
 | **CMO**  | Marketing, brand, positioning, content, SEO, lead gen, PLG, campaigns, copy, channels | **deep skill** — `skills/roles/cmo/` |
-| **CSO**  | Strategy, competition, partnerships, GTM, growth, market entry, M&A, big-bet decisions | — |
-| **CXO**  | UX, onboarding, retention, NPS, churn, service delivery, customer success, support | — |
-| **CHRO** | HR, hiring, firing, payroll, labor law, comp, performance, contractors, org design | — |
+| **CSO**  | Strategy, competition, partnerships, GTM, growth, market entry, M&A, big-bet decisions | **deep skill** — `skills/roles/cso/` |
+| **CXO**  | UX, onboarding, retention, NPS, churn, service delivery, customer success, support | **deep skill** — `skills/roles/cxo/` |
+| **CHRO** | HR, hiring, firing, payroll, labor law, comp, performance, contractors, org design | **deep skill** — `skills/roles/chro/` |
 | **CLC**  | Contracts, IP, privacy/compliance, corporate/board, securities, regulatory, employment-legal, litigation framing | **deep skill** — `skills/roles/clc/` |
-| **CEO**  | Doesn't fit any role above, OR requires the user's own founder-level judgment to weigh competing roles | — |
+| **CEO**  | Synthesis when functional roles disagree, OR irreducibly founder-level judgment | **deep skill** — `skills/roles/ceo/` |
 
 **Roles marked "deep skill"** load a richer knowledge layer when activated — reference frameworks, decision heuristics, fillable templates, procedural playbooks, and end-to-end worked examples. The router sends the question; the deep skill informs how the answer is constructed.
 

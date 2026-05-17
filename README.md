@@ -237,7 +237,9 @@ MIT. See [LICENSE](./LICENSE). Use it, fork it, sell services on top of it — j
 
 ## Credits
 
-An open-source project, MIT-licensed, started in **October 2025**. The protocol is distilled from many sources — C-suite operating experience, decision-making heuristics, the Chanakya tradition of advisor-counsel, and knowledge shared across the open internet. Contributions welcome.
+Designed and developed by **Durai (@rdmurugan)** as a solo project — protocol, deep skills, eval harness, plugin packaging, and the Sakthi Graph fork. MIT-licensed, started October 2025. The protocol is distilled from many sources — C-suite operating experience, decision-making heuristics, the Chanakya tradition of advisor-counsel, and knowledge shared across the open internet. Contributions welcome.
+
+Copyright © 2025–2026 Durai (@rdmurugan). Released under MIT.
 
 ## Acknowledgments
 

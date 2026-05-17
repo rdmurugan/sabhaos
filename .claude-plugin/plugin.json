@@ -4,8 +4,8 @@
   "version": "2.1.0",
   "description": "A local-first AI council protocol for Claude. Every substantive question is classified into one of 9 C-suite roles (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CLC, CEO) and answered in the Chanakya tradition — terse, decisive, recommendation-first, tradeoff-aware. Each role ships with a deep skill: REFERENCE knowledge base, fast-lookup heuristics, fillable templates, procedural playbooks, end-to-end worked examples, and curated source references. Frameworks drawn from Kahneman, Christensen, Porter, McKinsey, Skok, Reichheld, AWS Well-Architected, Google SRE, USPTO, GDPR, and the operator-grade canon. Pairs with Sakthi Graph (sakthi-graph, also in this marketplace) — a local-first AI knowledge graph forked from MemPalace and pre-shaped for the Sabha council (9 role wings auto-bootstrapped on `sakthi init --sabha`). Together: Sabha (the council) + Chanakya (the archetype) + Sakthi (your power, your memory, your machine). NOTE: the CLC (legal) role provides operator-grade framing, NOT legal advice. Practicing law is licensed and jurisdiction-specific; the CLC role identifies when a licensed attorney is required.",
   "author": {
-    "name": "Sabha OS contributors",
-    "url": "https://github.com/rdmurugan/sabhaos"
+    "name": "Durai (@rdmurugan)",
+    "url": "https://github.com/rdmurugan"
   },
   "license": "MIT",
   "homepage": "https://github.com/rdmurugan/sabhaos",

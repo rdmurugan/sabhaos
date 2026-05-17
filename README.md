@@ -261,6 +261,26 @@ sabha-os/
 └── README.md
 ```
 
+## Optional: `/chanakya` — add a Chanakya Neeti verse to a reply
+
+A purely opt-in skill layers exactly one verse from Chanakya's *Neeti* on top of the routed role's answer. Fires only when explicitly invoked — `/chanakya`, "add a Chanakya verse", or "what would Chanakya say." 77 verses across all 9 role domains. Discipline (the skill only fires on explicit invocation, never auto) is verified by [a dedicated eval](./evals/chanakya/).
+
+```
+/chanakya
+Should we accept the term sheet at a 30% down round, or push back?
+
+Routing: CFO.
+
+> *"Wealth comes from circulating, not from hoarding."*
+> — Chanakya Neeti 5.12
+
+Take the round. Push back only on the no-shop and the liquidation
+preference. You lose option value on price; you gain 18 months. Worth it
+because a runway you don't have isn't optionality.
+```
+
+See [`skills/chanakya-neeti/SKILL.md`](./skills/chanakya-neeti/SKILL.md) for the full verse corpus and activation rules.
+
 ## Documentation map
 
 | Doc | What's in it |

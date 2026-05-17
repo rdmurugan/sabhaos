@@ -1,0 +1,108 @@
+# Chanakya activation eval — opt-in discipline test
+#
+# Tests two things:
+#   1. ACTIVATION CORRECTNESS  — when the user explicitly invokes Chanakya
+#                                mode, does the reply include exactly one
+#                                attributed verse?
+#   2. NON-ACTIVATION DISCIPLINE — when the user does NOT invoke Chanakya
+#                                  mode (even if the topic is "strategic"),
+#                                  does the reply omit the verse?
+#
+# Each question is run under TWO conditions:
+#   - sabha            (CLAUDE.md + role deep skill, NO chanakya-neeti)
+#   - sabha+chanakya   (CLAUDE.md + role deep skill + chanakya-neeti SKILL.md)
+#
+# Pass criteria differ per question type:
+#   - explicit_invoke=true   → expect a Chanakya verse in `sabha+chanakya` reply
+#                              AND no verse in `sabha` reply (opt-in discipline)
+#   - explicit_invoke=false  → expect NO verse in EITHER condition
+#                              (this tests that loading the skill into context
+#                              doesn't make the model auto-fire it)
+
+questions:
+  # ── explicit invocation: slash command ──────────────────────────────────
+  - id: chanakya-01
+    role: CSO
+    explicit_invoke: true
+    category: strategy
+    prompt: |
+      /chanakya
+
+      A larger competitor with deeper pockets just announced a product that
+      directly overlaps with our wedge. They have 10x our distribution. Do
+      we (a) accelerate to ship faster, (b) pivot to an adjacent niche they
+      won't bother with, or (c) propose a partnership?
+    notes: |
+      Strong reply: one CSO-domain verse from the corpus (likely 10.16
+      reconcile/counter/engage, or 6.3 enemy logic), then the decisive
+      recommendation in CSO voice. Exactly one verse.
+
+  # ── explicit invocation: plain English ─────────────────────────────────
+  - id: chanakya-02
+    role: CFO
+    explicit_invoke: true
+    category: money
+    prompt: |
+      We have 7 months runway. An investor offered $500K at a 30% discount
+      to our last round's valuation. Their thesis is good but the dilution
+      stings. Take it or push for better terms?
+
+      Add a Chanakya verse to this answer.
+    notes: |
+      Strong reply: one CFO-domain verse (likely 5.12 wealth circulates,
+      or 5.14 deploy to virtuous, or 2.54 don't abandon sure thing),
+      followed by the recommendation.
+
+  # ── explicit invocation: "what would Chanakya say" ─────────────────────
+  - id: chanakya-03
+    role: CHRO
+    explicit_invoke: true
+    category: people
+    prompt: |
+      My co-founder has started taking unilateral decisions and freezing me
+      out of customer conversations. We've been at this 18 months. We have
+      no formal cofounder agreement. What would Chanakya say about this?
+    notes: |
+      Strong reply: one verse on traitors/alliances/trust (likely 6.20
+      adversity reveals true friends, or 6.26 traitors fall), then the
+      CHRO recommendation. Should NOT be hedged or therapy-shaped —
+      Chanakya was not gentle.
+
+  # ── NO invocation: strategic topic but no Chanakya signal ──────────────
+  - id: chanakya-04
+    role: CSO
+    explicit_invoke: false
+    category: strategy
+    prompt: |
+      A larger competitor just announced a product that overlaps with our
+      wedge. Do we accelerate, pivot to an adjacent niche, or propose a
+      partnership?
+    notes: |
+      This is a "strategic" question with no Chanakya signal. The reply
+      MUST NOT include a Chanakya verse, even with the skill loaded in
+      context. Tests opt-in discipline against keyword temptation.
+
+  # ── NO invocation: money topic ─────────────────────────────────────────
+  - id: chanakya-05
+    role: CFO
+    explicit_invoke: false
+    category: money
+    prompt: |
+      We have 7 months runway and an offer for $500K at a 30% discount to
+      our last valuation. Take it or push back?
+    notes: |
+      Same shape as chanakya-02 minus the invocation. The reply MUST be
+      a normal CFO Sabha response without any Chanakya verse.
+
+  # ── NO invocation: people topic, even with "what should I do" ──────────
+  - id: chanakya-06
+    role: CHRO
+    explicit_invoke: false
+    category: people
+    prompt: |
+      My co-founder is freezing me out of customer conversations and
+      taking unilateral decisions. No cofounder agreement in place.
+      What should I do?
+    notes: |
+      Identical situation to chanakya-03 but without "what would Chanakya
+      say." Reply MUST NOT add a verse just because the topic is heavy.

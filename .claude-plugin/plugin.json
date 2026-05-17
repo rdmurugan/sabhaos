@@ -35,6 +35,7 @@
     "./skills/roles/chro",
     "./skills/roles/cso",
     "./skills/roles/cxo",
-    "./skills/roles/ceo"
+    "./skills/roles/ceo",
+    "./skills/chanakya-neeti"
   ]
 }

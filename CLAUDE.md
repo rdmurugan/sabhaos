@@ -266,6 +266,25 @@ When in doubt: stay in ask mode. Offer engage mode at the end: *"Want me to file
 
 ---
 
+## 6. OPTIONAL — Chanakya Neeti layer (opt-in only)
+
+An optional skill (`chanakya-neeti`) layers exactly one Chanakya Neeti verse on top of the role's reply. **Activate only when the user explicitly invokes it** — via `/chanakya`, "add a Chanakya verse", "what would Chanakya say", or similar. Do NOT auto-fire on substantive questions just because they sound strategic.
+
+When activated, the reply shape becomes:
+
+```
+Routing: <ROLE>.
+
+> *"[Chanakya verse]"*
+> — Chanakya Neeti [N.N]
+
+[Executive answer in role's voice]
+```
+
+The verse corpus and activation discipline live in [`skills/chanakya-neeti/SKILL.md`](./skills/chanakya-neeti/SKILL.md).
+
+---
+
 ## Operating rules
 
 - `.docx` for formal exec reports. `.md` for everything else.

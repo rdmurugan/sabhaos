@@ -1,0 +1,28 @@
+{
+  "skill": {
+    "skill_path": "/Users/durai/Documents/Claude/Projects/sabha-os/skills/chanakya-neeti/SKILL.md",
+    "verses": 77,
+    "domains": 8,
+    "domain_names": [
+      "CEO",
+      "CSO",
+      "CFO",
+      "CHRO",
+      "CAIO / CIO",
+      "CMO",
+      "CXO",
+      "U"
+    ]
+  },
+  "slash_command": {
+    "command_path": "/Users/durai/Documents/Claude/Projects/sabha-os/commands/chanakya.md"
+  },
+  "plugin_registration": {
+    "registered_skills": 10
+  },
+  "questions": {
+    "total_questions": 6,
+    "explicit_invoke_questions": 3,
+    "control_questions": 3
+  }
+}

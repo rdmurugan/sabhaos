@@ -237,7 +237,7 @@ MIT. See [LICENSE](./LICENSE). Use it, fork it, sell services on top of it — j
 
 ## Credits
 
-An open-source project conceived by [Durai (@rdmurugan)](https://github.com/rdmurugan) in **October 2025**. The protocol is distilled from many sources — C-suite experience, operating heuristics, the Chanakya tradition of advisor-counsel, and knowledge shared across the open internet. Contributions welcome.
+An open-source project, MIT-licensed, started in **October 2025**. The protocol is distilled from many sources — C-suite operating experience, decision-making heuristics, the Chanakya tradition of advisor-counsel, and knowledge shared across the open internet. Contributions welcome.
 
 ## Acknowledgments
 

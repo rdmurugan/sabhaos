@@ -266,7 +266,7 @@ Counsel review for any aggressive campaign.
 
 Marks like "California Bakery" or "Quick Coffee" or "Best Software" are descriptive and often unregistrable on the Principal Register. You can sometimes register on the Supplemental Register (less protection) and convert to Principal after 5 years of use.
 
-**Operator move:** avoid descriptive marks unless you have a strong reason. Made-up words ("Spotify," "Xerox," "Sengol") or arbitrary words ("Apple" for computers) are the strongest mark types.
+**Operator move:** avoid descriptive marks unless you have a strong reason. Made-up words ("Spotify," "Xerox," "Kodak") or arbitrary words ("Apple" for computers) are the strongest mark types.
 
 ### Stylized marks for descriptive or weak word marks
 

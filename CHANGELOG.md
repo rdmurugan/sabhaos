@@ -13,7 +13,7 @@ Memory layer rebranded as **Sakthi Graph** — a fork of MemPalace pre-shaped fo
 - **Surface rebrand:** package `sakthi-graph` (was `mempalace`); CLI commands `sakthi` and `sakthi-mcp` (legacy aliases retained); all 31 MCP tool names renamed `sakthi_*` (e.g., `sakthi_search`, `sakthi_kg_query`, `sakthi_diary_write`).
 - **Sabha-specific preset** (`mempalace/sabha.py`): the new `sakthi init --sabha` flag bootstraps 9 role wings pre-configured for the Sabha council (cfo, cmo, cio, caio, cso, cxo, chro, clc, ceo), each with rooms tuned for that role's decision domain. Optional `--personal` adds 6 life wings (health, finance-personal, family, career, time, self).
 - **Role-aware diary templates** — one per Sabha role, with fields appropriate to that role's diary discipline (e.g., CFO template prompts for numbers used + framework + tradeoff; CLC template enforces risk-tier + counsel hand-off; CEO template captures irreducible-question + regret-check).
-- **License:** MIT preserved. Sabha-specific additions copyright Durai (@rdmurugan), released under the same MIT.
+- **License:** MIT preserved. Sabha-specific additions copyright the Sabha OS contributors, released under the same MIT.
 
 ### Updated in Sabha OS
 - **CLAUDE.md MEMORY section** — renamed "MemPalace wire-up (example)" → "Sakthi Graph wire-up (recommended)". Tool names updated `mempalace_*` → `sakthi_*`. Sabha remains memory-MCP-agnostic at the protocol layer (mem0, Letta, Zep, plain MemPalace still work; only Sakthi gets the Sabha-shaped preset).

@@ -4,8 +4,8 @@
     "description": "Sabha OS \u2014 a local-first AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded."
   },
   "owner": {
-    "name": "Durai (@rdmurugan)",
-    "email": "rdmurugannew@gmail.com"
+    "name": "Sabha OS contributors",
+    "url": "https://github.com/rdmurugan/sabhaos"
   },
   "plugins": [
     {
@@ -13,7 +13,8 @@
       "source": "./",
       "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO) and answered in the Chanakya tradition \u2014 terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project. Deep skills shipped for CFO and CMO (frameworks from Kahneman, Christensen, Porter, McKinsey, Skok, and others). Live-data hooks documented for Stripe, QuickBooks, and Google Analytics.",
       "author": {
-        "name": "Durai (@rdmurugan)"
+        "name": "Sabha OS contributors",
+        "url": "https://github.com/rdmurugan/sabhaos"
       },
       "homepage": "https://github.com/rdmurugan/sabhaos",
       "repository": "https://github.com/rdmurugan/sabhaos",

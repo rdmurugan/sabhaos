@@ -58,11 +58,11 @@ Material changes will be noted at the top of this file (the "Last updated" date)
 
 ## Contact
 
-For privacy questions about Sabha OS specifically: rdmurugannew@gmail.com or file an issue at [https://github.com/rdmurugan/sabhaos/issues](https://github.com/rdmurugan/sabhaos/issues).
+For privacy questions about Sabha OS specifically: file an issue at [https://github.com/rdmurugan/sabhaos/issues](https://github.com/rdmurugan/sabhaos/issues).
 
 For privacy questions about Claude / Anthropic services: see Anthropic's privacy contact above.
 
-For privacy questions about MemPalace: see the MemPalace repo.
+For privacy questions about Sakthi Graph (the memory layer used in the example wire-up): see the [sakthi-graph repo](https://github.com/rdmurugan/sakthi-graph).
 
 ---
 

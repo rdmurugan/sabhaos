@@ -82,9 +82,32 @@ JUDGE_MODEL_DEFAULT = "claude-opus-4-7"
 # Detects "Chanakya Neeti [N.N]" attribution. A reply has a verse if this
 # pattern hits at least once.
 VERSE_ATTRIBUTION_RE = re.compile(
-    r"chanakya\s*neeti\s*\[?\s*\d+\.\d+\s*\]?",
+    r"chanakya\s*neeti\s*\[?\s*(\d+\.\d+)\s*\]?",
     re.IGNORECASE,
 )
+
+# Parse the SKILL.md corpus to build the set of valid verse numbers. The
+# corpus marks each verse with `**[N.N]**` at the start of a line.
+CORPUS_VERSE_RE = re.compile(r"^\*\*\[(\d+\.\d+)\]\*\*", re.MULTILINE)
+CORPUS_VERSES: frozenset[str] = frozenset(CORPUS_VERSE_RE.findall(CHANAKYA_SKILL))
+
+
+def extract_cited_verses(reply: str) -> list[str]:
+    """Return the verse numbers (e.g., '10.16') cited in a reply."""
+    return VERSE_ATTRIBUTION_RE.findall(reply)
+
+
+def classify_verses(reply: str) -> dict:
+    """Categorize cited verses: in-corpus vs hallucinated vs none."""
+    cited = extract_cited_verses(reply)
+    in_corpus = [v for v in cited if v in CORPUS_VERSES]
+    hallucinated = [v for v in cited if v not in CORPUS_VERSES]
+    return {
+        "n_cited": len(cited),
+        "cited": cited,
+        "in_corpus": in_corpus,
+        "hallucinated": hallucinated,
+    }
 
 
 def load_deep_skill(role: Optional[str]) -> str:
@@ -149,23 +172,52 @@ def generate_reply(client, model: str, prompt: str, system: str) -> str:
 
 
 def grade_question(question: dict, replies: dict[str, str]) -> dict:
-    """Score a single question's two-condition outputs against expected behavior."""
-    expects_verse = question["explicit_invoke"]
-    grades = {}
+    """Score a single question's two-condition outputs against expected behavior.
+
+    Grading model (v2):
+
+      Condition `sabha+chanakya` (skill loaded) drives ACTIVATION + DISCIPLINE:
+        - invoke + verse present + exactly 1 verse + in-corpus → activation PASS
+        - no invoke + no verse                                 → discipline PASS
+
+      Condition `sabha` (no skill loaded) is OBSERVATIONAL ONLY:
+        - We do NOT pass/fail on it. The model may produce a Chanakya verse
+          from training-data knowledge when the user explicitly asks for one.
+          That's expected behavior, not a wiring bug.
+        - We instead record whether the verses cited are in-corpus or
+          hallucinated. The skill's actual value over the baseline is
+          attribution accuracy.
+    """
+    grades: dict = {}
     for cond, reply in replies.items():
-        n_verses = count_verses(reply)
-        has_verse = n_verses >= 1
-        if cond == "sabha":
-            # Without chanakya skill loaded, we should never see a verse.
-            expected = False
-        else:  # sabha+chanakya
-            expected = expects_verse
-        passed = (has_verse == expected) and (n_verses <= 1 if expected else True)
-        grades[cond] = {
-            "n_verses_detected": n_verses,
-            "expected_verse": expected,
-            "passed": passed,
+        verses = classify_verses(reply)
+        has_verse = verses["n_cited"] >= 1
+        grade = {
+            "n_verses_detected": verses["n_cited"],
+            "cited_verses": verses["cited"],
+            "in_corpus_verses": verses["in_corpus"],
+            "hallucinated_verses": verses["hallucinated"],
+            "attribution_correct": (
+                None if verses["n_cited"] == 0
+                else len(verses["hallucinated"]) == 0
+            ),
         }
+        if cond == "sabha+chanakya":
+            if question["explicit_invoke"]:
+                # ACTIVATION test: must produce exactly 1 in-corpus verse
+                grade["test"] = "activation"
+                grade["passed"] = (
+                    verses["n_cited"] == 1
+                    and len(verses["in_corpus"]) == 1
+                )
+            else:
+                # DISCIPLINE test: must produce zero verses
+                grade["test"] = "discipline"
+                grade["passed"] = (verses["n_cited"] == 0)
+        else:  # sabha (no skill loaded)
+            grade["test"] = "baseline_observation"
+            grade["passed"] = None  # not graded; observational only
+        grades[cond] = grade
     return grades
 
 
@@ -192,80 +244,149 @@ def run_question(client, question: dict, candidate_model: str) -> dict:
 
 
 def aggregate(records: list[dict]) -> dict:
-    activation_correct = 0
-    discipline_correct = 0
-    activation_total = 0
-    discipline_total = 0
+    """Aggregate v2: activation + discipline (pass/fail) + attribution-accuracy
+    observation between skill-loaded and skill-not-loaded conditions."""
+    activation_pass = activation_total = 0
+    discipline_pass = discipline_total = 0
+
+    # Baseline-vs-skill observation: count attribution-correct replies
+    # only across the invoke questions, since control questions produce
+    # no verses in either condition.
+    baseline_invoke_with_verse = 0
+    baseline_invoke_attribution_correct = 0
+    skill_invoke_with_verse = 0
+    skill_invoke_attribution_correct = 0
+
     for r in records:
+        g_skill = r["grades"]["sabha+chanakya"]
+        g_base = r["grades"]["sabha"]
+
         if r["explicit_invoke"]:
             activation_total += 1
-            if r["grades"]["sabha+chanakya"]["passed"]:
-                activation_correct += 1
+            if g_skill["passed"]:
+                activation_pass += 1
+            if g_base["n_verses_detected"] >= 1:
+                baseline_invoke_with_verse += 1
+                if g_base["attribution_correct"]:
+                    baseline_invoke_attribution_correct += 1
+            if g_skill["n_verses_detected"] >= 1:
+                skill_invoke_with_verse += 1
+                if g_skill["attribution_correct"]:
+                    skill_invoke_attribution_correct += 1
         else:
             discipline_total += 1
-            if r["grades"]["sabha+chanakya"]["passed"]:
-                discipline_correct += 1
+            if g_skill["passed"]:
+                discipline_pass += 1
 
-    sabha_clean = sum(1 for r in records if r["grades"]["sabha"]["passed"])
+    def rate(num: int, denom: int):
+        return (num / denom) if denom else None
+
     return {
         "n_questions": len(records),
         "activation": {
-            "passed": activation_correct,
+            "passed": activation_pass,
             "total": activation_total,
-            "rate": activation_correct / activation_total if activation_total else None,
+            "rate": rate(activation_pass, activation_total),
+            "criterion": "exactly 1 in-corpus verse when invoked + skill loaded",
         },
         "discipline_with_skill_loaded": {
-            "passed": discipline_correct,
+            "passed": discipline_pass,
             "total": discipline_total,
-            "rate": discipline_correct / discipline_total if discipline_total else None,
+            "rate": rate(discipline_pass, discipline_total),
+            "criterion": "zero verses when NOT invoked, even with skill loaded",
         },
-        "control_no_skill_loaded": {
-            "passed_no_verse": sabha_clean,
-            "total": len(records),
-            "rate": sabha_clean / len(records) if records else None,
+        "attribution_accuracy": {
+            "baseline_no_skill": {
+                "verses_produced": baseline_invoke_with_verse,
+                "in_corpus_or_real": baseline_invoke_attribution_correct,
+                "rate": rate(
+                    baseline_invoke_attribution_correct,
+                    baseline_invoke_with_verse,
+                ),
+                "note": "Verses the model produced from training data alone, on invoke questions, in `sabha` condition. Attribution-correct = cited verse number exists in our curated corpus.",
+            },
+            "with_skill_loaded": {
+                "verses_produced": skill_invoke_with_verse,
+                "in_corpus": skill_invoke_attribution_correct,
+                "rate": rate(
+                    skill_invoke_attribution_correct,
+                    skill_invoke_with_verse,
+                ),
+                "note": "Verses the model produced with the chanakya-neeti skill loaded. Attribution-correct = cited verse number exists in the corpus.",
+            },
         },
     }
 
 
+def _fmt_pct(rate):
+    return f"{rate:.0%}" if rate is not None else "n/a"
+
+
 def render_markdown(meta: dict, records: list[dict], summary: dict) -> str:
+    act = summary["activation"]
+    disc = summary["discipline_with_skill_loaded"]
+    att_base = summary["attribution_accuracy"]["baseline_no_skill"]
+    att_skill = summary["attribution_accuracy"]["with_skill_loaded"]
+
     lines = [
-        f"# Chanakya activation eval — {meta['run_date']}",
+        f"# Chanakya activation eval — {meta['run_date']} (grader v2)",
         "",
         f"- Candidate model: `{meta['candidate_model']}`",
         f"- Question set: {meta['n_questions']} ({meta['n_invoke']} invoke / {meta['n_control']} control)",
+        f"- Corpus size: {len(CORPUS_VERSES)} verses",
         "",
         "## Headline",
         "",
-        f"- **Activation correctness** (invoke → verse): "
-        f"{summary['activation']['passed']}/{summary['activation']['total']} "
-        f"({summary['activation']['rate']:.0%})"
-        if summary['activation']['rate'] is not None else "- Activation: n/a",
+        f"- **Activation** (invoke + skill → exactly 1 in-corpus verse): "
+        f"**{act['passed']}/{act['total']} ({_fmt_pct(act['rate'])})**",
         f"- **Discipline with skill loaded** (no invoke → no verse): "
-        f"{summary['discipline_with_skill_loaded']['passed']}/{summary['discipline_with_skill_loaded']['total']} "
-        f"({summary['discipline_with_skill_loaded']['rate']:.0%})"
-        if summary['discipline_with_skill_loaded']['rate'] is not None else "",
-        f"- **Control (no skill loaded)** (always no verse): "
-        f"{summary['control_no_skill_loaded']['passed_no_verse']}/{summary['control_no_skill_loaded']['total']} "
-        f"({summary['control_no_skill_loaded']['rate']:.0%})",
+        f"**{disc['passed']}/{disc['total']} ({_fmt_pct(disc['rate'])})**",
+        f"- **Attribution accuracy** — *new in v2 grader.* When the model is "
+        f"asked for Chanakya in plain English and produces a verse:",
+        f"  - Without the skill loaded (baseline, training-data only): "
+        f"  {att_base['in_corpus_or_real']}/{att_base['verses_produced']} "
+        f"verses in-corpus ({_fmt_pct(att_base['rate'])})",
+        f"  - With the skill loaded: "
+        f"  {att_skill['in_corpus']}/{att_skill['verses_produced']} "
+        f"verses in-corpus ({_fmt_pct(att_skill['rate'])})",
         "",
         "## Per-question results",
         "",
-        "| ID | Role | Invoke? | sabha verse? | sabha+chanakya verse? | activation pass | discipline pass |",
-        "|---|---|---|---|---|---|---|",
+        "| ID | Role | Invoke? | sabha verses | sabha attribution | sabha+chanakya verses | activation | discipline |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for r in records:
         s_g = r["grades"]["sabha"]
         c_g = r["grades"]["sabha+chanakya"]
         invoke = "YES" if r["explicit_invoke"] else "no"
-        s_v = "yes" if s_g["n_verses_detected"] >= 1 else "no"
-        c_v = f"{c_g['n_verses_detected']}"
-        if r["explicit_invoke"]:
-            act = "✓" if c_g["passed"] else "✗"
-            disc = "—"
+        s_cites = ", ".join(s_g["cited_verses"]) or "—"
+        c_cites = ", ".join(c_g["cited_verses"]) or "—"
+        if s_g["n_verses_detected"] == 0:
+            s_attr = "—"
         else:
-            act = "—"
-            disc = "✓" if c_g["passed"] else "✗"
-        lines.append(f"| {r['id']} | {r['role']} | {invoke} | {s_v} | {c_v} | {act} | {disc} |")
+            s_attr = (
+                "in-corpus" if s_g["attribution_correct"] else "hallucinated"
+            )
+        if r["explicit_invoke"]:
+            act_cell = "✓" if c_g["passed"] else "✗"
+            disc_cell = "—"
+        else:
+            act_cell = "—"
+            disc_cell = "✓" if c_g["passed"] else "✗"
+        lines.append(
+            f"| {r['id']} | {r['role']} | {invoke} | "
+            f"{s_cites} | {s_attr} | {c_cites} | {act_cell} | {disc_cell} |"
+        )
+    lines.append("")
+    lines.append(
+        f"**Reading the attribution column:** for the `sabha` condition (no "
+        f"skill loaded), the model produces Chanakya verses from training-"
+        f"data knowledge when explicitly asked. The attribution column flags "
+        f"whether those cited verse numbers exist in our curated "
+        f"{len(CORPUS_VERSES)}-verse corpus. Hallucinated = the cited number "
+        f"isn't in the corpus, so either the model invented a plausible-"
+        f"looking number, or it's a real verse outside our curated set."
+    )
     lines.append("")
     return "\n".join(lines) + "\n"
 

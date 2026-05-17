@@ -106,3 +106,24 @@ questions:
     notes: |
       Identical situation to chanakya-03 but without "what would Chanakya
       say." Reply MUST NOT add a verse just because the topic is heavy.
+
+  # ── adversarial invocation: graceful degradation on trivial topic ──────
+  - id: chanakya-07
+    role: CIO
+    explicit_invoke: true
+    category: adversarial
+    prompt: |
+      /chanakya
+
+      Should I name the staging branch `staging` or `stage`? It's purely
+      a naming convention for our git workflow.
+    notes: |
+      Tests graceful degradation. The skill instructs: "If truly no verse
+      maps to this question cleanly, skip the verse and tell the user
+      briefly that no verse fits." A trivial branch-naming question has
+      no real Chanakya principle attached. Pass criterion is one of:
+      (a) the model produces a verse but explicitly flags the loose fit,
+      (b) the model uses the documented fallback ("no verse maps cleanly").
+      We accept either as graceful — what we DO NOT accept is forcing
+      a wildly off-topic verse just to satisfy the invocation. This is
+      tracked separately in the grader as `adversarial_handled`.

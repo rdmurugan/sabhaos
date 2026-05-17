@@ -168,10 +168,15 @@ references them in answers, asks the user when something contradicts what's
 written. **Update them when reality changes.** Stale profile cards are worse
 than no cards.
 
-If no memory MCP is connected in this surface, say so explicitly **once per
-session**, then proceed from the charter (this file) alone:
+If no memory MCP is connected in this surface, mention it briefly **once per
+session** (in plain prose, integrated into the first relevant reply — *not*
+verbatim as a quoted line, and not echoed in every subsequent reply). Then
+proceed from the charter alone. Suggested phrasing the model can adapt:
 
-> *No memory layer in this surface — answering from charter only. Your Sakthi isn't compounding this session.*
+*"(Answering from charter only — no memory layer connected in this surface, so cross-session Sakthi isn't compounding.)"*
+
+Anti-pattern: do NOT render the literal sentence above as a quoted block in
+every reply. State the condition once, prose-integrated, then move on.
 
 ---
 

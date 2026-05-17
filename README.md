@@ -263,7 +263,7 @@ sabha-os/
 
 ## Optional: `/chanakya` — add a Chanakya Neeti verse to a reply
 
-A purely opt-in skill layers exactly one verse from Chanakya's *Neeti* on top of the routed role's answer. Fires only when explicitly invoked — `/chanakya`, "add a Chanakya verse", or "what would Chanakya say." 77 verses across all 9 role domains. Discipline (the skill only fires on explicit invocation, never auto) is verified by [a dedicated eval](./evals/chanakya/).
+A purely opt-in skill layers exactly one verse from Chanakya's *Neeti* on top of the routed role's answer. Fires only when explicitly invoked — `/chanakya`, "add a Chanakya verse", or "what would Chanakya say." 76 verses across all 9 role domains. A [dedicated eval](./evals/chanakya/) (v2 grader, 2026-05-17): **activation 3/3, discipline 3/3, attribution-accuracy 100% with the skill loaded vs. 0% without** — the model produces verses from training when asked, but hallucinates the verse numbers. The skill's value is curated attribution + opt-in discipline.
 
 ```
 /chanakya

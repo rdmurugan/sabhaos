@@ -7,6 +7,24 @@ description: OPT-IN ONLY. Layer exactly one Chanakya Neeti verse on top of a nor
 
 This skill adds **one Chanakya Neeti verse** on top of a normal Sabha role reply. It is **strictly opt-in** — fired only when the user explicitly asks for it.
 
+## Why this skill exists (the honest read)
+
+Claude already knows Chanakya from training data — that's not what this skill provides. The eval at [`evals/chanakya/`](../../evals/chanakya/) found that when asked for a Chanakya verse without this skill loaded, the model:
+
+1. **Produces verses with hallucinated or misremembered verse numbers.** The 2026-05-17 baseline run showed citations like "Chanakya Neeti 1.6," "1.15," and "4.11" — content that looks plausible but where the verse numbers are either invented or misremembered (e.g., the "straight trees" verse is actually 11.8, not 1.6).
+2. **Picks verses inconsistently across similar questions.** Without a curated set to choose from, verse selection drifts.
+3. **Has no opt-in discipline.** The model will produce a verse whenever it pleases the user, with no respect for the request shape.
+
+This skill solves three things:
+
+- **Attribution accuracy.** All 77 verses ship with their correct Neeti numbers. When the skill is loaded and a verse is cited, the number is auditable against the corpus in this file.
+- **Verse selection quality.** A Quick-Reference Table maps common question patterns to the canonical verse. The model has a curated palette instead of training-data drift.
+- **Opt-in discipline.** The skill loads into context but does not auto-fire. The eval confirms the model respects the activation guardrail even on strategic-sounding topics that *would* tempt a verse.
+
+The skill is a **discipline upgrade**, not a knowledge upgrade. Position it that way.
+
+---
+
 ## When to activate (and when NOT to)
 
 **Activate this skill when the user does any of these:**
@@ -267,8 +285,7 @@ Organized by Sabha domain. Use the domain to find the right verse faster.
 **[6.10]** *"Avoid contact with the wicked. Choose the company of good people. Perform good deeds day and night. Remember always that life is ephemeral."*
 → Customer and team environment matters. Toxic users erode culture.
 
-**[9.25]** *"How can people be happy with a corrupt ruler? How can one fall back on a friend who is insincere? How can the family be happy with a discordant spouse? How can one gain glory by teaching an undisciplined pupil?"*
-→ Customer success starts with leadership integrity. No CX programme fixes a broken product promise.
+> *(Verse 9.25 — corrupt ruler / insincere friend / discordant spouse — was previously duplicated here from the CFO domain at line ~151. It applies equally to CX, but de-duplicated to keep the corpus a unique set.)*
 
 ---
 

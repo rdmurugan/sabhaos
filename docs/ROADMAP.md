@@ -10,12 +10,14 @@ What's next, by quarter. Subject to change — this is a roadmap, not a contract
 
 - ✅ All 9 C-suite deep skills (CFO, CMO, CIO, CAIO, CSO, CXO, CHRO, CLC, CEO)
 - ✅ Sabha-router skill enforcing routing-at-top-of-reply
-- ✅ Reproducible eval harness with LLM-as-judge + pairwise
+- ✅ Reproducible eval harness with LLM-as-judge + pairwise (`evals/`)
 - ✅ Sakthi Graph fork (`sakthi-graph`) with `--sabha` preset
 - ✅ `sakthi sittham` corpus-ingest verb (graphify → Sakthi role wing)
 - ✅ Marketplace plugins for Claude Code (`sabha-os` + `sakthi-graph`)
 - ✅ Memory-backend-agnostic positioning (Claude Memory + Sakthi + mem0 + Letta + plain markdown)
 - ✅ Public-release documentation surface (ARCHITECTURE, ROLES, EVALS, MEMORY-OPTIONS, FOR-REGULATED-INDUSTRIES, CUSTOMIZATION, PHILOSOPHY, QUICKSTART)
+- ✅ Optional `chanakya-neeti` opt-in skill (76 verses, `/chanakya` slash command)
+- ✅ Dedicated Chanakya activation eval (`evals/chanakya/`) — v2 grader with corpus-correctness check; latest results: activation 3/3, discipline 3/3, baseline attribution 0% vs skill-loaded 100%
 
 The protocol layer is feature-complete for v2.x. From here, the work shifts from *building* to *opening up* — more LLMs, more memory backends, more council presets.
 

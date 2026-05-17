@@ -4,10 +4,10 @@
 
 ## Result
 
-**9/9 PASS.**
+**9/9 PASS** (initial run; superseded by the 2026-05-17 smoke after Q7 added and 9.25 deduplicated).
 
 ```
-Chanakya integration — structural smoke
+Chanakya integration — structural smoke (initial)
 --------------------------------------------------
   ok   frontmatter name = chanakya-neeti
   ok   description uses opt-in language (4/4 markers)
@@ -21,6 +21,8 @@ Chanakya integration — structural smoke
 --------------------------------------------------
 ALL STRUCTURAL CHECKS PASSED
 ```
+
+> **Update (2026-05-17):** verse 9.25 was duplicated in the corpus (CFO and CXO domains); deduplicated. Corpus now reports 76 unique verses. Q7 (adversarial invocation) added. Latest smoke result is the 7-question / 76-verse version, all checks still pass.
 
 ## What this confirms
 

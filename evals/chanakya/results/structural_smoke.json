@@ -1,7 +1,7 @@
 {
   "skill": {
     "skill_path": "/Users/durai/Documents/Claude/Projects/sabha-os/skills/chanakya-neeti/SKILL.md",
-    "verses": 77,
+    "verses": 76,
     "domains": 8,
     "domain_names": [
       "CEO",
@@ -21,8 +21,8 @@
     "registered_skills": 10
   },
   "questions": {
-    "total_questions": 6,
-    "explicit_invoke_questions": 3,
+    "total_questions": 7,
+    "explicit_invoke_questions": 4,
     "control_questions": 3
   }
 }

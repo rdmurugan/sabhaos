@@ -1,7 +1,7 @@
 {
   "name": "sabha-marketplace",
   "metadata": {
-    "description": "Sabha OS \u2014 a local-first AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded."
+    "description": "Sabha OS \u2014 an AI council protocol for Claude. In the Chanakya tradition: decisive, tradeoff-aware, grounded. Memory-backend-agnostic; works with Claude Memory or the optional Sakthi Graph for local-first memory."
   },
   "owner": {
     "name": "Durai (@rdmurugan)",
@@ -11,7 +11,7 @@
     {
       "name": "sabha-os",
       "source": "./",
-      "description": "A local-first AI council protocol for Claude. Every substantive question is classified into a role (CIO, CAIO, CFO, CMO, CSO, CXO, CHRO, CEO) and answered in the Chanakya tradition \u2014 terse, decisive, recommendation-first. Pairs with a local memory MCP to build your Sakthi: an accumulated, locally-owned memory of every decision, person, and project. Deep skills shipped for CFO and CMO (frameworks from Kahneman, Christensen, Porter, McKinsey, Skok, and others). Live-data hooks documented for Stripe, QuickBooks, and Google Analytics.",
+      "description": "An AI council protocol for Claude. Every substantive question is classified into one of 9 C-suite roles (CFO, CMO, CIO, CAIO, CSO, CXO, CHRO, CLC, CEO) and answered in the Chanakya tradition \u2014 terse, decisive, recommendation-first, tradeoff-aware, grounded. Each role ships as a deep skill: REFERENCE knowledge base, heuristics, fillable templates, procedural playbooks, worked examples. Memory-backend-agnostic \u2014 works with Claude Memory zero-config, or optionally pairs with Sakthi Graph (also in this marketplace) for local-first, role-shaped institutional memory.",
       "author": {
         "name": "Durai (@rdmurugan)",
         "url": "https://github.com/rdmurugan"

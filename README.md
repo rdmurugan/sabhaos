@@ -1,12 +1,12 @@
 # Sabha OS
 
-> An open-source protocol for a local-first AI council. A Chanakya in your terminal, with memory of every decision. Builds your **Sakthi**.
+> An open-source **protocol** for a Claude-native AI council. Decisive, tradeoff-aware, grounded — in the Chanakya tradition. Works with any memory backend, including Claude Memory.
 
 > 👋 **New here and not a developer?** Start with [docs/QUICKSTART.md](./docs/QUICKSTART.md) — a 10-minute, no-installation guide to get Sabha working inside Claude.ai. No terminal, no Git, no command-line.
 
-**Sabha** (சபை, सभा, Sanskrit for *council*) is a routing protocol for Claude. **Chanakya**  (சாணக்யா, the original strategic advisor, author of the *Arthashastra*) is the archetype it embodies. **Sakthi** (சக்தி, शक्ति, Sanskrit/Tamil for *power*) is what it builds — your accumulated knowledge of decisions, people, and projects, stored in local memory only you own.
+**Sabha** (சபை, सभा, Sanskrit for *council*) is a routing protocol for Claude. Every load-bearing question gets classified into a C-suite role, answered in the **Chanakya** tradition — terse, decisive, recommendation-first, tradeoff-aware, grounded.
 
-Most AI replies are option-shaped: *"here are five approaches with pros and cons."* That's exhausting when you're running something. Sabha forces a Chanakya-style answer instead: a role, a recommendation, a tradeoff. And it remembers.
+Most AI replies are option-shaped: *"here are five approaches with pros and cons."* That's exhausting when you're running something. Sabha forces a different reply:
 
 ```
 Routing: CFO. Cut the SaaS line 40%. You lose the analytics tier.
@@ -16,18 +16,32 @@ Routing: CFO. Cut the SaaS line 40%. You lose the analytics tier.
 ## The stack
 
 ```
-Category:   Local-first AI council
-Protocol:   Sabha OS          ← how the council thinks (rules of engagement)
-Archetype:  Chanakya          ← what kind of advisor you're getting
-Outcome:    Your Sakthi       ← what compounds in your memory over time
-Memory:     MemPalace (or any memory MCP) ← substrate where Sakthi lives
+Category:    AI council protocol
+─────────────────────────────────────────────────────────────
+Protocol:    Sabha OS              ← how the council thinks
+Archetype:   Chanakya              ← the voice it speaks in
+Memory:      pluggable backend     ← Claude Memory, Sakthi Graph,
+                                     mem0, Letta, Zep, plain markdown
+─────────────────────────────────────────────────────────────
+Optional:    Sakthi Graph          ← local-first memory backend
+             Sittham                  + corpus ingest verb
+                                     (when you want institutional
+                                     memory that never leaves your
+                                     machine)
 ```
 
-Three Sanskrit/Tamil words, each doing different work:
+**The protocol is the product.** It's a structured way of asking and answering questions — 9 roles, deep skills per role, an engage/ask mode discipline, a grounding rule. It runs on top of any memory backend you trust.
 
-- **Sabha** is the *mechanism* — every substantive question gets classified into a role and answered in that role's voice.
-- **Chanakya** is the *archetype* — strategic, decisive, tradeoff-aware. Not a guru. Not a hype-man. A counselor.
-- **Sakthi** is the *outcome* — every decision, every person, every project compounds into a memory only you own.
+The most common pairings:
+
+| Memory backend | Best for | What you get |
+|---|---|---|
+| **Claude Memory** | Default for most users | Zero-config; lives on Anthropic's servers; cross-conversation semantic recall |
+| **Sakthi Graph** | Privacy / regulated / power users | Local-first, role-shaped, graph-queryable; runs on your machine |
+| **mem0 / Letta / Zep / Pieces** | Existing memory-MCP investment | Sabha is memory-MCP-agnostic; plug yours in |
+| **Plain `memory/` markdown** | Minimalists | No MCP at all; just a folder of files |
+
+See [`docs/MEMORY-OPTIONS.md`](./docs/MEMORY-OPTIONS.md) for the full comparison and tradeoffs.
 
 ## What it does
 
@@ -41,52 +55,63 @@ Routing: CFO (primary). CSO weighs in on the partnership angle.
 
 Nine built-in roles (CFO · CMO · CIO · CAIO · CSO · CXO · CHRO · CLC · CEO), fully customizable. Two modes — **ask** (chat reply) and **engage** (document-grade deliverable). A memory hook so the council remembers your projects, people, and prior decisions — locally, on your machine.
 
-## Why local memory matters
+## Sabha + Claude Memory — they work together
 
-Cloud AI products forget you the moment a session ends — or worse, they remember you on *their* servers. Sabha is built around a different assumption: **your Sakthi belongs in your house.**
+Claude has shipped its own cross-conversation memory. **Sabha is compatible with it, not competitive.** Most users should run Sabha *on top of* Claude Memory and get both: the council's routing discipline + Anthropic's built-in cross-session recall. No configuration changes needed — the protocol queries memory generically.
 
-The example wire-up in this repo uses [**Sakthi Graph**](https://github.com/rdmurugan/sakthi-graph) — an open-source (MIT), graph-shaped, locally-running memory MCP. Any memory MCP that exposes search and write tools works the same way (mem0, Letta, Zep, Pieces, or a plain `memory/` folder of markdown). Pick whichever you'll actually run. The point is: **the memory lives where you live.**
+```
+USER QUESTION ──► Sabha routes to <ROLE> ──► role queries memory backend ──► reply
+                                                  │
+                          ┌───────────────────────┴───────────────────────┐
+                          ▼                                               ▼
+                    Claude Memory                              Sakthi / mem0 / Letta / ...
+                  (default, server-side,                       (local, structured, optional)
+                   semantic recall)
+```
+
+You don't have to pick. They serve different purposes:
+- **Claude Memory** handles casual cross-session recall and personalization — it's the default and it's fine.
+- **Sakthi Graph** is the local-first, graph-shaped, role-segmented option for users who want institutional memory that never leaves their machine — useful for regulated industries (health, legal, finance, defense) or anyone who wants auditable, portable, LLM-agnostic memory. See [`docs/FOR-REGULATED-INDUSTRIES.md`](./docs/FOR-REGULATED-INDUSTRIES.md).
+
+The default `CLAUDE.md` is memory-MCP-agnostic at the protocol layer. Wire in whichever memory you want, or use Claude Memory and skip the wiring entirely.
 
 ## Install
 
 ### Option A — Claude Code marketplace (recommended)
 
-The `sabha-marketplace` ships **two plugins together**: `sabha-os` (the protocol) and `sakthi-graph` (the memory layer — your Sakthi). Install both, then the Python package for the Sakthi binary:
+Minimum install — just the protocol. Works with Claude Memory (or no memory at all):
 
 ```bash
-# 1. Add the marketplace once
 claude plugin marketplace add rdmurugan/sabhaos
-
-# 2. Install the protocol
 claude plugin install sabha-os@sabha-marketplace
-
-# 3. Install the memory plugin (optional but recommended)
-claude plugin install sakthi-graph@sabha-marketplace
-
-# 4. Install the Sakthi binary so the MCP server can launch
-uv tool install sakthi-graph
-# OR:    pip install sakthi-graph
-
-# 5. Bootstrap the Sabha-shaped palace (9 role wings: cfo, cmo, cio, ..., ceo)
-sakthi init --sabha ~/sakthi
 ```
 
 Then personalize — open `~/.claude/plugins/cache/sabha-marketplace/sabha-os/CLAUDE.md` and fill in the `[BRACKETS]` with your entities, people, and projects.
 
-Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply. With Sakthi running, the council's recommendations draw on your accumulated Sakthi knowledge-graph.
+Open a new Claude Code session and ask anything substantive — you'll see the routing line at the top of the reply.
 
-**Don't want the memory layer?** Skip steps 3 and 4. Sabha works as a routing protocol without memory; you just won't get cross-session compounding. (Sabha is memory-MCP-agnostic — you can also wire mem0, Letta, Zep, or any other compatible MCP. See [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).)
+### Optional: add the local-first memory backend
 
-### Sittham — bring a folder into the council's consciousness
+If you want institutional memory that never leaves your machine — graph-shaped, role-segmented, LLM-agnostic — add Sakthi Graph:
 
-Sakthi Graph 0.2.3+ exposes `sakthi sittham` (சித்தம், Tamil for *consciousness / awareness*) — file any folder into the matching Sabha role wing so the council holds it in mind:
+```bash
+claude plugin install sakthi-graph@sabha-marketplace
+uv tool install sakthi-graph   # or: pip install sakthi-graph
+sakthi init --sabha ~/sakthi   # bootstraps the 9 role wings
+```
+
+When to add Sakthi vs stick with Claude Memory: see [`docs/MEMORY-OPTIONS.md`](./docs/MEMORY-OPTIONS.md). Short version: Sakthi is for privacy-sensitive users, regulated industries, and operators who want auditable, portable, graph-queryable memory. For most casual use, Claude Memory is fine and zero-config.
+
+#### Sittham — bring a folder into the council's consciousness
+
+If you've installed Sakthi Graph, `sakthi sittham` (சித்தம், Tamil for *consciousness / awareness*) files any folder's distilled graph into the matching Sabha role wing:
 
 ```bash
 /graphify ~/path/to/corpus            # one-time prep
 sakthi sittham ~/path/to/corpus       # bring into cfo / cmo / caio / ... by content
 ```
 
-Corpus content scores against the 9 role vocabularies; the dominant role's `decisions` room receives a compact summary drawer. Weak or split signals fall back to `ceo/synthesis-notes`.
+Corpus content scores against the 9 role vocabularies; the dominant role's `decisions` room receives a compact summary drawer. Weak or split signals fall back to `ceo/synthesis-notes`. Power-user feature; safe to skip until you need it.
 
 ### Option B — Direct git clone (if you prefer)
 
@@ -209,9 +234,12 @@ sabha-os/
 │   ├── QUICKSTART.md                  # No-install path for non-technical users
 │   ├── ARCHITECTURE.md                # Full system view (folder → graphify → sittham → Sakthi → Sabha)
 │   ├── ROLES.md                       # The 9 roles, voices, and what each deep skill ships
+│   ├── MEMORY-OPTIONS.md              # Claude Memory vs Sakthi vs mem0/Letta vs plain markdown — pick-by-need
+│   ├── FOR-REGULATED-INDUSTRIES.md    # Health, legal, finance, defense — local-first posture + compliance framing
 │   ├── CUSTOMIZATION.md               # Renaming roles, swapping memory, multiple Sabhas
 │   ├── PHILOSOPHY.md                  # Why these 5 disciplines; the Chanakya tradition
-│   └── EVALS.md                       # Eval methodology + results summary
+│   ├── EVALS.md                       # Eval methodology + results summary
+│   └── ROADMAP.md                     # What's shipped, Q3 LLM-agnostic SDK bet, future quarters
 ├── examples/
 │   ├── personal-sakthi.CLAUDE.md      # Life council (Health · Finance · Family · Career · Time · Self)
 │   ├── professional-sakthi.CLAUDE.md  # C-suite council (default — 9 roles)
@@ -240,9 +268,12 @@ sabha-os/
 | [`docs/QUICKSTART.md`](./docs/QUICKSTART.md) | No-install path. 10 minutes inside Claude.ai. For non-developers. |
 | [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | The full system: how the council, memory, and corpus-ingest layers compose. |
 | [`docs/ROLES.md`](./docs/ROLES.md) | The 9 roles, their voices, and what each deep skill ships. |
+| [`docs/MEMORY-OPTIONS.md`](./docs/MEMORY-OPTIONS.md) | Memory backend comparison — Claude Memory, Sakthi, mem0, Letta, plain markdown. Pick-by-need. |
+| [`docs/FOR-REGULATED-INDUSTRIES.md`](./docs/FOR-REGULATED-INDUSTRIES.md) | For healthcare, legal, finance, defense — local-first posture, threat model, compliance framing. |
 | [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md) | Renaming roles, swapping memory MCPs, multiple Sabhas, sharing presets. |
 | [`docs/PHILOSOPHY.md`](./docs/PHILOSOPHY.md) | Why these 5 disciplines. What Sabha is and isn't. The Chanakya tradition. |
 | [`docs/EVALS.md`](./docs/EVALS.md) | Eval methodology, current results, how to run it yourself. |
+| [`docs/ROADMAP.md`](./docs/ROADMAP.md) | What's shipped, what's bet on Q3 (LLM-agnostic SDK), what comes next. |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | PR conventions; what kinds of contributions help. |
 | [`PRIVACY.md`](./PRIVACY.md) | No data collection. Local-first by design. |
 | [`CHANGELOG.md`](./CHANGELOG.md) | Version history. |

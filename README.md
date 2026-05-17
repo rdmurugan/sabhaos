@@ -39,7 +39,7 @@ Routing: CFO (primary). CSO weighs in on the partnership angle.
 [role-voice answer, drawing on your Sakthi]
 ```
 
-Eight built-in roles, fully customizable. Two modes — **ask** (chat reply) and **engage** (document-grade deliverable). A memory hook so the council remembers your projects, people, and prior decisions — locally, on your machine.
+Nine built-in roles (CFO · CMO · CIO · CAIO · CSO · CXO · CHRO · CLC · CEO), fully customizable. Two modes — **ask** (chat reply) and **engage** (document-grade deliverable). A memory hook so the council remembers your projects, people, and prior decisions — locally, on your machine.
 
 ## Why local memory matters
 
@@ -185,39 +185,67 @@ Results are committed to [`evals/results/`](./evals/results/). The interpretatio
 
 ```
 sabha-os/
-├── CLAUDE.md                        # The protocol — this IS Sabha
+├── CLAUDE.md                          # The protocol — this IS Sabha
 ├── .claude-plugin/
-│   └── plugin.json                  # Claude Code plugin manifest
+│   ├── plugin.json                    # Claude Code plugin manifest
+│   └── marketplace.json               # Marketplace manifest (ships sabha-os + sakthi-graph)
 ├── skills/
-│   ├── sabha-router/SKILL.md        # Forces the routing on every reply
-│   └── roles/
-│       ├── cfo/                     # Deep CFO skill (REFERENCE, heuristics, templates, playbooks, worked examples)
-│       └── cmo/                     # Deep CMO skill (same structure)
+│   ├── sabha-router/SKILL.md          # Forces the routing on every reply
+│   └── roles/                         # 9 deep skills (one per role)
+│       ├── cfo/                       # runway · pricing · unit economics · capital allocation
+│       ├── cmo/                       # positioning · JTBD · channels · behavioral pricing
+│       ├── cio/                       # infra · vendors · SRE · FinOps · incidents
+│       ├── caio/                      # LLM strategy · RAG · evals · model selection · governance
+│       ├── cso/                       # where-to-play · wedge · partnerships · scenarios
+│       ├── cxo/                       # activation · retention · churn · NPS · customer success
+│       ├── chro/                      # hiring · classification · comp · performance · severance
+│       ├── clc/                       # contracts · IP · privacy · corporate · regulatory (NOT legal advice)
+│       └── ceo/                       # synthesis · founder-mode · decision memos
 ├── commands/
-│   ├── engage.md                    # /engage — switch to engage mode
-│   ├── ask.md                       # /ask — back to chat mode
-│   └── route.md                     # /route <ROLE> — force a specific role
+│   ├── engage.md                      # /engage — switch to engage mode
+│   ├── ask.md                         # /ask — back to chat mode
+│   └── route.md                       # /route <ROLE> — force a specific role
 ├── docs/
-│   ├── QUICKSTART.md                # No-install path for non-technical users
-│   ├── CUSTOMIZATION.md
-│   ├── PHILOSOPHY.md
-│   └── ROLES.md
+│   ├── QUICKSTART.md                  # No-install path for non-technical users
+│   ├── ARCHITECTURE.md                # Full system view (folder → graphify → sittham → Sakthi → Sabha)
+│   ├── ROLES.md                       # The 9 roles, voices, and what each deep skill ships
+│   ├── CUSTOMIZATION.md               # Renaming roles, swapping memory, multiple Sabhas
+│   ├── PHILOSOPHY.md                  # Why these 5 disciplines; the Chanakya tradition
+│   └── EVALS.md                       # Eval methodology + results summary
 ├── examples/
-│   ├── personal-sakthi.CLAUDE.md    # Life council
-│   ├── professional-sakthi.CLAUDE.md # C-suite council (default)
-│   ├── developer-sakthi.CLAUDE.md   # Code council
-│   ├── solo-founder.CLAUDE.md       # Profession preset
-│   ├── agency.CLAUDE.md             # Profession preset
-│   └── researcher.CLAUDE.md         # Profession preset
+│   ├── personal-sakthi.CLAUDE.md      # Life council (Health · Finance · Family · Career · Time · Self)
+│   ├── professional-sakthi.CLAUDE.md  # C-suite council (default — 9 roles)
+│   ├── developer-sakthi.CLAUDE.md     # Code council (Architect · Reviewer · Security · QA · Mentor)
+│   ├── solo-founder.CLAUDE.md         # Profession preset
+│   ├── agency.CLAUDE.md               # Profession preset
+│   └── researcher.CLAUDE.md           # Profession preset
 ├── evals/
-│   ├── questions.yaml               # 20 operator-style questions
-│   ├── run_eval.py                  # The harness
-│   ├── judge.py                     # LLM-as-judge rubric + pairwise
-│   ├── README.md                    # Methodology
-│   └── results/                     # JSON + Markdown reports
-├── LICENSE                          # MIT
+│   ├── questions.yaml                 # 20 operator-style questions
+│   ├── run_eval.py                    # The harness (with --resume + retries)
+│   ├── judge.py                       # LLM-as-judge rubric + pairwise
+│   ├── README.md                      # Methodology
+│   ├── ANALYSIS.md                    # Results interpretation
+│   └── results/                       # JSON + Markdown reports
+├── LICENSE                            # MIT, © 2025-2026 Durai Rajamanickam (@rdmurugan)
+├── PRIVACY.md                         # No data collection. Local-first by design.
+├── CHANGELOG.md
+├── CONTRIBUTING.md
 └── README.md
 ```
+
+## Documentation map
+
+| Doc | What's in it |
+|---|---|
+| [`docs/QUICKSTART.md`](./docs/QUICKSTART.md) | No-install path. 10 minutes inside Claude.ai. For non-developers. |
+| [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | The full system: how the council, memory, and corpus-ingest layers compose. |
+| [`docs/ROLES.md`](./docs/ROLES.md) | The 9 roles, their voices, and what each deep skill ships. |
+| [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md) | Renaming roles, swapping memory MCPs, multiple Sabhas, sharing presets. |
+| [`docs/PHILOSOPHY.md`](./docs/PHILOSOPHY.md) | Why these 5 disciplines. What Sabha is and isn't. The Chanakya tradition. |
+| [`docs/EVALS.md`](./docs/EVALS.md) | Eval methodology, current results, how to run it yourself. |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | PR conventions; what kinds of contributions help. |
+| [`PRIVACY.md`](./PRIVACY.md) | No data collection. Local-first by design. |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Version history. |
 
 ## Compatibility
 

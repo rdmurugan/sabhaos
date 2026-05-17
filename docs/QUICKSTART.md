@@ -18,7 +18,7 @@ After this quickstart, you'll have a personalized AI council inside Claude.ai. E
 |---|---|
 | The Sabha routing protocol (Routing: CFO, etc.) | ✓ Yes |
 | Decisive answers with named tradeoffs | ✓ Yes |
-| Eight role personas (CFO, CMO, CIO, CSO, CXO, CHRO, CAIO, CEO) | ✓ Yes |
+| Nine role personas (CFO, CMO, CIO, CAIO, CSO, CXO, CHRO, CLC, CEO) | ✓ Yes |
 | Deep CFO and CMO frameworks (Kahneman, Christensen, Porter, etc.) | ✓ Yes (with extra paste — Step 6) |
 | Personal / Developer council presets | ✓ Yes |
 | Memory across sessions (your Sakthi compounds) | ✗ No — needs technical setup |
@@ -253,7 +253,9 @@ If you want to make the jump, the [main README](../README.md) walks through the 
 - **Customizing roles, voice, memory:** [docs/CUSTOMIZATION.md](./CUSTOMIZATION.md)
 - **The philosophy behind the protocol:** [docs/PHILOSOPHY.md](./PHILOSOPHY.md)
 - **What each role does in detail:** [docs/ROLES.md](./ROLES.md)
-- **Does it actually work?** [evals/results/latest.md](../evals/results/latest.md) has the eval data
+- **The full system view (council + memory + corpus-ingest):** [docs/ARCHITECTURE.md](./ARCHITECTURE.md)
+- **Does it actually work?** [docs/EVALS.md](./EVALS.md) summarizes the results; full data in [evals/](../evals/)
+- **Ingest folders into your Sakthi:** once you've installed Sakthi Graph, `sakthi sittham <folder>` files any folder's distilled graph into the right Sabha wing. Power-user feature; safe to skip until you want it.
 
 ---
 

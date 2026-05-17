@@ -1,6 +1,17 @@
 # Roles reference
 
-The eight default roles in the **professional council**, what they cover, and how their voices differ. All roles share the **Chanakya** disposition (decisive, tradeoff-aware, terse), and every reply they give is meant to compound into your **Sakthi** via the memory layer.
+The nine default roles in the **professional council** (CFO · CMO · CIO · CAIO · CSO · CXO · CHRO · CLC · CEO), what they cover, and how their voices differ. All roles share the **Chanakya** disposition (decisive, tradeoff-aware, terse), and every reply they give is meant to compound into your **Sakthi** via the memory layer.
+
+Each role is a **deep skill**, not a voice tweak. Beyond the role-voice charter in `CLAUDE.md`, every role loads:
+
+- **REFERENCE** — multi-framework knowledge base with numerical thresholds (LTV/CAC ≥ 3, Rule of 40, CAC payback, 70-20-10 capital allocation, etc.) and citations.
+- **Heuristics** — fast-lookup triage rules for the common questions in that domain.
+- **Templates** — fillable artifacts (runway model, unit economics sheet, pricing canvas, positioning statement, JTBD canvas, channel portfolio, hiring scorecard, contract redline package).
+- **Playbooks** — procedural step-by-step workflows (monthly close, fundraise prep, cost-cut decision, repositioning, channel allocation, hire-to-classify, trademark registration).
+- **Worked examples** — end-to-end scenarios with real numbers.
+- **References** — citations to the body of work each framework draws from.
+
+The role's skill folder is at [`skills/roles/<role>/`](../skills/roles/) — open it to see exactly what the role brings to a reply.
 
 For non-professional councils — `personal-sakthi.CLAUDE.md` (life roles) and `developer-sakthi.CLAUDE.md` (code roles) — see the corresponding files in `examples/`.
 
@@ -109,7 +120,7 @@ For non-professional councils — `personal-sakthi.CLAUDE.md` (life roles) and `
 
 ## Customizing roles
 
-The eight above are defaults for the **professional council**. Common customizations:
+The nine above are defaults for the **professional council**. Common customizations:
 
 - **Solo founder, simpler stack:** collapse CFO+CSO into "Operator," drop CHRO if you have no employees.
 - **Agency:** rename CIO to "Creative Director," add "Account Lead."

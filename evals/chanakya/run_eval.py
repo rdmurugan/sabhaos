@@ -440,10 +440,15 @@ def main() -> int:
     (RESULTS_DIR / "latest.md").write_text(render_markdown(meta, records, summary))
 
     print()
-    print(f"Activation:    {summary['activation']['passed']}/{summary['activation']['total']}")
-    print(f"Discipline:    {summary['discipline_with_skill_loaded']['passed']}/{summary['discipline_with_skill_loaded']['total']}")
-    print(f"Control:       {summary['control_no_skill_loaded']['passed_no_verse']}/{summary['control_no_skill_loaded']['total']}")
-    print(f"Results:       {RESULTS_DIR / (out_stem + '.md')}")
+    act = summary["activation"]
+    disc = summary["discipline_with_skill_loaded"]
+    att_base = summary["attribution_accuracy"]["baseline_no_skill"]
+    att_skill = summary["attribution_accuracy"]["with_skill_loaded"]
+    print(f"Activation:           {act['passed']}/{act['total']}")
+    print(f"Discipline (loaded):  {disc['passed']}/{disc['total']}")
+    print(f"Attribution baseline: {att_base['in_corpus_or_real']}/{att_base['verses_produced']}")
+    print(f"Attribution w/skill:  {att_skill['in_corpus']}/{att_skill['verses_produced']}")
+    print(f"Results:              {RESULTS_DIR / (out_stem + '.md')}")
     return 0
 
 

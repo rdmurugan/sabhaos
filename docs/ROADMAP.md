@@ -17,7 +17,7 @@ What's next, by quarter. Subject to change — this is a roadmap, not a contract
 - ✅ Memory-backend-agnostic positioning (Claude Memory + Sakthi + mem0 + Letta + plain markdown)
 - ✅ Public-release documentation surface (ARCHITECTURE, ROLES, EVALS, MEMORY-OPTIONS, FOR-REGULATED-INDUSTRIES, CUSTOMIZATION, PHILOSOPHY, QUICKSTART)
 - ✅ Optional `chanakya-neeti` opt-in skill (76 verses, `/chanakya` slash command)
-- ✅ Dedicated Chanakya activation eval (`evals/chanakya/`) — v2 grader with corpus-correctness check; latest results: activation 3/3, discipline 3/3, baseline attribution 0% vs skill-loaded 100%
+- ✅ Dedicated Chanakya activation eval (`evals/chanakya/`) — v2 grader with corpus-correctness check. Latest results (2026-05-17, 7 questions): activation 4/4, discipline 2/3 (one topic-relevance leak; guardrail tightened), baseline attribution 0% vs skill-loaded 100%. Re-eval pending after the discipline patch.
 
 The protocol layer is feature-complete for v2.x. From here, the work shifts from *building* to *opening up* — more LLMs, more memory backends, more council presets.
 

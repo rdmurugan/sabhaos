@@ -1,6 +1,6 @@
 ---
 name: chanakya-neeti
-description: OPT-IN ONLY. Layer exactly one Chanakya Neeti verse on top of a normal Sabha role reply. Activate this skill ONLY when the user explicitly invokes Chanakya mode — they type `/chanakya`, say "add a Chanakya verse", "include neeti", "with a Chanakya quote", "answer in Chanakya mode", or similar explicit invocation. Do NOT activate on routine substantive questions. Do NOT auto-load on every load-bearing question. Do NOT add a verse just because the topic sounds strategic. When (and only when) explicitly invoked, prepend exactly ONE verse from the Neeti Corpus below — quoted with attribution, no commentary — then deliver the executive's recommendation in the routed role's voice as normal.
+description: OPT-IN ONLY. Layer exactly one Chanakya Neeti verse on top of a normal Sabha role reply. Activate this skill ONLY when the user explicitly invokes Chanakya mode IN THE CURRENT TURN — they type `/chanakya`, say "add a Chanakya verse", "include neeti", "with a Chanakya quote", "answer in Chanakya mode", "what would Chanakya say", or similar explicit invocation. The signal is the INVOCATION PHRASE, NOT THE TOPIC. Do NOT activate on routine substantive questions. Do NOT auto-load. Do NOT add a verse just because the topic sounds strategic or canonically Chanakya-relevant (cofounder conflict, betrayal, money, enemies, hiring). A cofounder-conflict question without an invocation phrase is an HR question; route to CHRO normally and do not add a verse. A money question without an invocation phrase is a CFO question; route normally and do not add a verse. When (and only when) explicitly invoked, prepend exactly ONE verse from the Neeti Corpus below — quoted with attribution, no commentary — then deliver the executive's recommendation in the routed role's voice as normal.
 ---
 
 # Chanakya Neeti (opt-in layer)
@@ -36,11 +36,21 @@ The skill is a **discipline upgrade**, not a knowledge upgrade. Position it that
 
 **Do NOT activate when:**
 - The question is substantive but the user did *not* invoke Chanakya
-- The topic sounds "strategic" or "political" — that's not invocation
+- The topic sounds "strategic" or "political" or "Chanakya-shaped" — that's not invocation
 - A prior turn in the conversation invoked Chanakya (do not carry over unless the user re-invokes; each invocation is one reply)
 - Sabha is routing normally without explicit Chanakya signal
 
 The opt-in discipline matters. The verses are powerful precisely because they're rare. Spraying them on every reply turns wisdom into ornament.
+
+### Anti-pattern caught in eval (do NOT do this)
+
+This question received an unsolicited verse in the 2026-05-17 eval run, which counted as a discipline failure:
+
+> *"My co-founder is freezing me out of customer conversations and taking unilateral decisions. No cofounder agreement in place. What should I do?"*
+
+There is no `/chanakya`, no "add a verse", no "what would Chanakya say." The topic is the *most* canonically-Chanakya thing imaginable (a "king without advisors"), but **that is not invocation**. The right reply is a normal CHRO/CLC/CEO routed answer with no verse layer. The wrong reply — what the model did — was to fire verse 9.24 anyway because the topic was tempting.
+
+If the question makes you *want* to add a Chanakya verse, that's exactly the cue to NOT add one unless the user invoked. Topic-relevance is a discipline trap; the signal is invocation phrasing, full stop.
 
 ## How to apply this skill (when activated)
 

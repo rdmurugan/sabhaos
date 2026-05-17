@@ -92,10 +92,14 @@ The integration passes if:
 
 - **Structural smoke**: 9/9.
 - **Behavioral eval activation rate**: ≥ 90% (we want near-perfect when user invokes).
-- **Behavioral eval discipline rate**: ≥ 80% (occasional model creativity is forgivable; persistent leak is a skill-design problem).
-- **Control rate (no skill loaded)**: 100% (this would be a wiring bug, not a model behavior issue).
+- **Behavioral eval discipline rate**: ≥ 80% (occasional model creativity is forgivable; persistent leak is a skill-design problem). One leak in 3 control questions = 67% = below threshold. That's what triggered the guardrail-tightening commit on 2026-05-17.
+- **Attribution accuracy with skill loaded**: 100% (the whole point of the skill).
 
-If any of these regress, the skill's description or guardrails likely need to be tightened.
+When a metric regresses, the skill's description or guardrails likely need tightening — see the discipline-failure entry in [`SKILL.md`](../../skills/chanakya-neeti/SKILL.md) ("Anti-pattern caught in eval") as the worked example of how a real eval finding becomes a skill update.
+
+## Small-N caveat
+
+Current N is 7 questions (4 invoke / 3 control). The 95% confidence interval on 4/4 is roughly 40%–100% — direction unambiguous, magnitude wobbly. The 67% discipline number is a single failure on a 3-question control — also a wide CI. Expanding to ~15 questions would tighten the discipline CI substantially and is a planned next step. Until then, take the headline numbers as *directional*, not *precision*.
 
 ---
 

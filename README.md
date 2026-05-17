@@ -77,13 +77,13 @@ Open a new Claude Code session and ask anything substantive — you'll see the r
 
 **Don't want the memory layer?** Skip steps 3 and 4. Sabha works as a routing protocol without memory; you just won't get cross-session compounding. (Sabha is memory-MCP-agnostic — you can also wire mem0, Letta, Zep, or any other compatible MCP. See [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).)
 
-### Sitham — settle a folder into your Sakthi
+### Sittham — bring a folder into the council's consciousness
 
-Sakthi Graph 0.2.2+ exposes `sakthi sitham` (சீதம் / सीदम्, *settled into place*) — file any folder into the matching Sabha role wing:
+Sakthi Graph 0.2.3+ exposes `sakthi sittham` (சித்தம், Tamil for *consciousness / awareness*) — file any folder into the matching Sabha role wing so the council holds it in mind:
 
 ```bash
-/graphify ~/path/to/corpus           # one-time prep
-sakthi sitham ~/path/to/corpus       # settle into cfo / cmo / caio / ... by content
+/graphify ~/path/to/corpus            # one-time prep
+sakthi sittham ~/path/to/corpus       # bring into cfo / cmo / caio / ... by content
 ```
 
 Corpus content scores against the 9 role vocabularies; the dominant role's `decisions` room receives a compact summary drawer. Weak or split signals fall back to `ceo/synthesis-notes`.

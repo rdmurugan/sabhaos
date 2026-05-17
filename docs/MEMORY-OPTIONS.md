@@ -15,7 +15,7 @@ Sabha is the protocol. The memory backend is a choice. This page is the honest c
 | Working in health, legal, finance, defense, or regulated industries. Compliance matters. | **Sakthi Graph** — see [`FOR-REGULATED-INDUSTRIES.md`](./FOR-REGULATED-INDUSTRIES.md) |
 | Already invested in mem0 / Letta / Zep / Pieces. | **Your existing memory MCP** (Sabha is memory-MCP-agnostic) |
 | Minimalist; just want a folder of markdown the AI reads. | **Plain `memory/` folder** |
-| Building on multiple LLMs (Claude + GPT + Gemini). | **Sakthi Graph** or **mem0** (LLM-agnostic) |
+| Want a memory layer that isn't tied to one LLM vendor (future-proofing). | **Sakthi Graph** or **mem0** — both are LLM-agnostic at the storage layer. Note: Sabha-the-protocol is currently Claude-focused; cross-model SDK is not on the active roadmap. |
 
 ---
 
@@ -61,8 +61,7 @@ What it is: A fork of [MemPalace](https://github.com/MemPalace/mempalace), MIT-l
 **Best for:**
 - Privacy-sensitive users (regulated industries, deal-flow data, IP-heavy work, government-adjacent).
 - Power users who want structured queries (`wing="cfo"`, `room="decisions"`) not just semantic recall.
-- Anyone planning to use Sabha across multiple LLMs (Claude + GPT + Gemini).
-- Operators who want their council's institutional memory to be a durable, portable asset — not a cloud subscription.
+- Operators who want their council's institutional memory to be a durable, portable asset — a directory on their disk, not a cloud subscription. (The memory layer is LLM-agnostic via MCP; the Sabha protocol layer is currently Claude-focused, with cross-model support held for a future quarter.)
 
 **Install:** `claude plugin install sakthi-graph@sabha-marketplace && uv tool install sakthi-graph && sakthi init --sabha ~/sakthi`
 

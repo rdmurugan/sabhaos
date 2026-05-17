@@ -130,7 +130,7 @@ Sabha CLAUDE.md              ← protocol
 Sittham                      ← optional; runs purely on local files
 ```
 
-No cloud LLM. No data leaves the workstation. This is the most restrictive deployment and it works because Sabha itself is just a protocol — pair it with any LLM that supports the system-prompt + tool-use shape.
+No cloud LLM. No data leaves the workstation. The Sabha protocol-as-text (CLAUDE.md) can be used as a system prompt with any model that accepts one — Claude is the primary tested target; a local Llama or similar can serve the air-gapped use case, though cross-model eval data is not yet published. The memory layer (Sakthi) is fully MCP-based and works with any MCP-capable LLM.
 
 ### Regulated SaaS company (fintech / healthtech / edtech)
 
@@ -188,6 +188,6 @@ If you're in the group that *does* need this page — because your work touches 
 
 The price you pay: 5 commands of setup instead of zero. Endpoint controls you already have. A documented evaluation.
 
-The benefit: an institutional memory of every decision your council has made, on your machine, MIT-licensed, portable across LLMs, auditable, and structurally aligned with the compliance regime you already live under.
+The benefit: an institutional memory of every decision your council has made, on your machine, MIT-licensed, auditable, MCP-based (so portable across MCP-capable LLMs at the storage layer), and structurally aligned with the compliance regime you already live under.
 
 Nothing about that is magic. It's just a reasonable architecture for the operators who need it.

@@ -21,35 +21,25 @@ The protocol layer is feature-complete for v2.x. From here, the work shifts from
 
 ---
 
-## Q3 2026 — the bet quarter
+## Q3 2026
 
-### 🎯 Bet 1: LLM-agnostic SDK MVP
+### 🛑 LLM-agnostic SDK — HELD by founder (2026-05-16)
 
-**The bet:** Make Sabha demonstrably run on at least three LLM families (Claude, OpenAI GPT, Google Gemini) with cross-model eval results in the repo.
+**Status:** Deferred. No timeline.
 
-**Why now:** Claude Memory shipping changes the strategic surface. If "Sabha = Claude plugin" becomes the cached association, the project loses optionality. The longer we wait to prove cross-model fluency, the harder the repositioning gets. The window is now.
+**Council recommendation (CSO + CMO + CAIO):** Ship `sabha-sdk` with Anthropic + OpenAI + Google adapters in Q3, plus cross-model eval data, to prevent "Sabha = Claude plugin" from becoming the cached association as Claude Memory's brand grows.
 
-**Scope:**
-- `sabha-sdk` Python package with provider adapters: Anthropic, OpenAI, Google.
-- The package wraps Sabha protocol + role deep skills around any provider's chat completion API.
-- Cross-model eval: same 20 questions, run on Claude Sonnet 4.6, GPT-5, Gemini Ultra. Pairwise comparison of each model with/without Sabha. Results committed to `evals/cross-model/`.
-- Documentation: `docs/SDK.md` with quickstarts per provider.
+**Founder override:** Held for now. Sabha continues to be primarily a Claude-Code protocol. The cross-model bet is real but not the priority this quarter. Other work (presets, content, possibly commercial scaffolding) takes precedence.
 
-**Kill criteria:** if cross-model eval shows Sabha's pairwise advantage collapses on a non-Claude provider (e.g., <60% pairwise win rate on GPT or Gemini), the protocol may be Claude-specific in ways we hadn't realized. That's a real finding — investigate before shipping.
+**What this means concretely:**
+- No `sabha-sdk` Python package this quarter.
+- No cross-model eval data committed.
+- README and MEMORY-OPTIONS.md continue to describe Sakthi as technically LLM-agnostic (it's an MCP server; any MCP-capable LLM can use it) but **do not** claim cross-model eval parity for the Sabha protocol layer.
+- The protocol-as-text (CLAUDE.md as a system prompt) remains portable in principle; that's not the same as a tested, eval-backed cross-model release.
 
-**Tradeoff:** time spent on the SDK is time not spent on more deep-skill content, more presets, or a UI layer. We give those up in Q3 to lock in the LLM-agnostic positioning before it's harder to claim.
+**Re-evaluate when:** Claude Memory's positioning forces the question, or an operator/customer asks for cross-model support specifically. Until then, hold.
 
-### 🎯 Bet 2: Cross-model eval data, public
-
-**The bet:** Publish the cross-model eval as a separate `evals/cross-model/` folder with the same reproducibility discipline as the v1 eval.
-
-**Why:** the existing eval (Sonnet candidate, Opus judge) is suspect to in-family bias. Cross-family judgments (e.g., GPT-5 judging Claude responses, vice versa) are stronger evidence. Public data > marketing claims.
-
-**Scope:** 3 candidates × 1 judge per candidate (from a different family) × 20 questions = 60 paired comparisons. Same rubric, same pairwise prompt.
-
-**Estimated cost:** ~$30–80 in API spend across providers. Wall time ~2 hours.
-
-### Bet 3: Premium skill packs — scaffold only
+### Bet: Premium skill packs — scaffold only
 
 **The bet:** Ship the *infrastructure* for premium skill packs (industry-vertical role deep skills) without yet shipping any premium content.
 
@@ -62,19 +52,21 @@ The protocol layer is feature-complete for v2.x. From here, the work shifts from
 
 **Kill criteria:** if no operator asks for vertical packs by end of Q3, the directory stays empty and we revisit in Q4.
 
+### Bet: Council presets — more professions
+
+**The bet:** Expand `examples/` with profession-specific presets distilled from real operator requests.
+
+**Scope:** lawyer, healthcare-founder, indie-dev, real-estate, K-12 educator — whichever ones get pulled by the community via issues or PRs. Don't write speculative presets; respond to demand.
+
+**Why:** the protocol's value compounds with usage. Every working preset that ships is a piece of evidence the protocol generalizes beyond founder/exec work.
+
 ---
 
 ## Q4 2026 — depending on Q3 signal
 
 Branches based on Q3 outcomes:
 
-### If cross-model eval shows Sabha generalizes
-
-- **Wider provider coverage.** Add adapters for Mistral, Llama (via vLLM), Cohere, local models via Ollama.
-- **Production-ready SDK release.** Stable API, semantic versioning, PyPI publishing.
-- **First operator-judged eval.** 5–10 real founders rating real questions. Compares against LLM-judged baseline.
-
-### If commercial demand materializes (B2 premium skill scaffold gets pull)
+### If commercial demand materializes (premium skill scaffold gets pull)
 
 - **First premium pack.** Likely candidate based on inbound: SaaS-CFO pack (deeper unit economics, fundraise prep for specific stages, board-deck templates).
 - **License + delivery infrastructure.** A way to sell, deliver, and update premium packs that doesn't break the open-source posture.
@@ -98,7 +90,7 @@ The honest answer: no plan should claim certainty 2+ quarters out. By Q1 2027:
 
 - Claude's memory feature surface will have evolved (more structured? team-shared?). Re-evaluate Sakthi positioning.
 - The MCP standard may have matured (or fragmented). Adjust accordingly.
-- New LLM families will exist that don't today (OpenAI 5.5?, Anthropic 5?, open-source frontier models). Re-eval cross-model.
+- The cross-model question (currently held) may force itself onto the roadmap by external pressure — a customer ask, a competitor move, or Claude Memory's brand crowding out the protocol-agnostic claim.
 
 What stays true regardless: **the protocol layer (the routing, the voice, the deep skills, the engage/ask discipline) is the durable asset.** Everything else is implementation that adapts to the surrounding ecosystem.
 
@@ -133,8 +125,10 @@ When you (a contributor, a user, a potential collaborator) want to influence the
 
 ## Tradeoff named (on the roadmap as a whole)
 
-Committing to LLM-agnostic in Q3 means **not** committing to additional deep-skill depth, additional council presets, or commercial-product packaging in Q3. You give up content velocity for positioning durability.
+Holding the LLM-agnostic SDK means leaning into the Claude-Code positioning for now. You give up the protocol-agnostic moat (a future where Sabha runs cleanly on GPT and Gemini with eval data to prove it). You gain Q3 capacity for content velocity (presets, premium-skill scaffolding) and a tighter posture as a Claude-native operator-grade plugin.
 
-Worth it because: the project's durable moat is the protocol shape + the deep-skill discipline. The protocol is only credible as a *protocol* if it runs on more than one provider. Locking that in before Claude Memory's brand pre-defines the association is more valuable than incremental content.
+The risk we accept by holding: "Sabha = Claude plugin" may become the cached association before we ever prove otherwise. If that happens, the eventual cross-model bet becomes a harder repositioning, not a fresh launch.
 
-If you disagree with this call — file an issue with your reasoning. Founder reserves the right to override the council read.
+The reason holding can be the right call anyway: depth in the Claude ecosystem (more presets, deeper skills, the eval discipline, the regulated-industry wedge) is also a moat. It just isn't the same moat.
+
+This is the founder's call. The council recorded its disagreement; the founder overrode it. Logged in this document for accountability.

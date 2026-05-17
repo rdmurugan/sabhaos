@@ -77,6 +77,17 @@ Open a new Claude Code session and ask anything substantive — you'll see the r
 
 **Don't want the memory layer?** Skip steps 3 and 4. Sabha works as a routing protocol without memory; you just won't get cross-session compounding. (Sabha is memory-MCP-agnostic — you can also wire mem0, Letta, Zep, or any other compatible MCP. See [`docs/CUSTOMIZATION.md`](./docs/CUSTOMIZATION.md).)
 
+### Ingest folders into your Sakthi
+
+Sakthi Graph 0.2.0+ exposes a `sakthi_import_graphify` MCP tool that ingests any [graphify](https://github.com/karpathy-inspired/graphify) corpus into the matching Sabha role wing:
+
+```bash
+/graphify ~/path/to/corpus
+sakthi import-graphify ~/path/to/corpus    # files to cfo / cmo / caio / ... by content
+```
+
+Corpus content scores against the 9 role vocabularies; the dominant role's `decisions` room receives a compact summary drawer (counts, top god nodes, role-signal block, report excerpt). Weak or split signals fall back to `ceo/synthesis-notes`. Full graph stays at the project for live re-querying.
+
 ### Option B — Direct git clone (if you prefer)
 
 ```bash

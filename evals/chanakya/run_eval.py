@@ -35,11 +35,38 @@ import time
 from pathlib import Path
 from typing import Optional
 
-import yaml
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "evals"))  # reuse existing judge.py utils
 
+
+def _require_deps():
+    """Import optional runtime deps with a friendly error if missing."""
+    missing = []
+    try:
+        import yaml  # noqa: F401
+    except ImportError:
+        missing.append("PyYAML")
+    try:
+        from anthropic import Anthropic  # noqa: F401
+        from anthropic import APIStatusError, APIConnectionError  # noqa: F401
+    except ImportError:
+        missing.append("anthropic")
+    if missing:
+        sys.stderr.write(
+            "ERROR: missing required Python package(s): "
+            + ", ".join(missing)
+            + "\n\nInstall with:\n"
+            + "    pip install -r "
+            + str(REPO_ROOT / "evals" / "requirements.txt")
+            + "\n\n(or, isolated: python3 -m venv .venv && source .venv/bin/activate "
+            + "&& pip install -r evals/requirements.txt)\n"
+        )
+        sys.exit(2)
+
+
+_require_deps()
+
+import yaml  # noqa: E402
 from anthropic import Anthropic  # noqa: E402
 from anthropic import APIStatusError, APIConnectionError  # noqa: E402
 
